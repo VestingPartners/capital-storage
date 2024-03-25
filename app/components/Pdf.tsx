@@ -106,7 +106,7 @@ export default function Pdf() {
           <Dialog open={isOpen} onClose={(val) => setIsOpen(val)} static={true}>
             <DialogPanel>
               <iframe
-                src="http://accioneduca.org/admin/archivos/modulos/ayudanos/prueba.pdf"
+                src="https://facultades.unab.cl/odontologia/wp-content/uploads/2021/03/prueba.pdf"
                 width="100%"
                 height="700px"
                 style={{ border: "none" }}
