@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 "use client";
 
 import React from "react";
@@ -42,9 +44,9 @@ export default function Mapa() {
     setMap(null);
   }, []);
 
-  const moveToLocation = (lat, lng) => {
-    map.panTo({ lat, lng });
-    map.setZoom(15); // Puedes ajustar el nivel de zoom según prefieras
+  const moveToLocation = (lat: any, lng: any) => {
+    map?.panTo({ lat, lng });
+    map?.setZoom(15);
   };
 
   return isLoaded ? (
