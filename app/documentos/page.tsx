@@ -3,10 +3,12 @@
 "use client";
 
 import { useState } from "react";
-import { Button, Dialog, DialogPanel } from "@tremor/react";
+import { Button, Dialog, DialogPanel, Select, SelectItem } from "@tremor/react";
 
 export default function DocumentosPage() {
   const [documentoActivo, setDocumentoActivo] = useState(null);
+  const [filtroActivo, setFiltroActivo] = useState("Todos"); // Ajuste para inicializar con "Todos"
+
   // Documentos de prueba
   const documentos = [
     {
@@ -27,15 +29,32 @@ export default function DocumentosPage() {
     },
   ];
 
-  // Función para manejar el evento de clic en el botón Ver (adaptar según necesidad)
-  const verDocumento = (nombre: any) => {
-    console.log(`Ver documento: ${nombre}`);
-    // Aquí puedes implementar la lógica para abrir el documento o mostrar detalles
+  const tipos = ["Todos", ...new Set(documentos.map((doc) => doc.tipo))]; // Asegúrate de incluir "Todos"
+
+  const handleSelectChange = (value) => {
+    setFiltroActivo(value);
   };
 
   return (
     <div className="container mx-auto px-4 py-8">
       <h2 className="text-2xl font-semibold mb-4">Listado de Documentos</h2>
+
+      {/* Selector de tipos de documentos ajustado para usar onValueChange */}
+      <div className="mb-4 w-44">
+        <Select
+          value={filtroActivo}
+          onValueChange={handleSelectChange} // Ajuste aquí
+          placeholder="Seleccione un tipo"
+          className="bg-white"
+        >
+          {tipos.map((tipo) => (
+            <SelectItem key={tipo} value={tipo}>
+              {tipo}
+            </SelectItem>
+          ))}
+        </Select>
+      </div>
+
       <div className="overflow-x-auto">
         <table className="table-auto w-full">
           <thead>
@@ -49,25 +68,29 @@ export default function DocumentosPage() {
             </tr>
           </thead>
           <tbody>
-            {documentos.map((documento, index) => (
-              <tr
-                key={index}
-                className={`${index % 2 === 0 ? "bg-gray-100" : "bg-white"}`}
-              >
-                <td className="border px-4 py-2">{documento.nombre}</td>
-                <td className="border px-4 py-2">{documento.tipo}</td>
-                <td className="border px-4 py-2">{documento.inversion}</td>
-                <td className="border px-4 py-2">{documento.fecha}</td>
-                <td className="border px-4 py-2 flex justify-center">
-                  <button
-                    className="px-4 py-2  rounded hover:bg-blue-500 transition duration-150 ease-in-out underline"
-                    onClick={() => setDocumentoActivo(documento)}
-                  >
-                    Ver Pdf
-                  </button>
-                </td>
-              </tr>
-            ))}
+            {documentos
+              .filter(
+                (doc) => filtroActivo === "Todos" || doc.tipo === filtroActivo
+              )
+              .map((documento, index) => (
+                <tr
+                  key={index}
+                  className={`${index % 2 === 0 ? "bg-gray-100" : "bg-white"}`}
+                >
+                  <td className="border px-4 py-2">{documento.nombre}</td>
+                  <td className="border px-4 py-2">{documento.tipo}</td>
+                  <td className="border px-4 py-2">{documento.inversion}</td>
+                  <td className="border px-4 py-2">{documento.fecha}</td>
+                  <td className="border px-4 py-2 flex justify-center">
+                    <button
+                      className="px-4 py-2 rounded hover:bg-blue-500 transition duration-150 ease-in-out underline"
+                      onClick={() => setDocumentoActivo(documento)}
+                    >
+                      Ver Pdf
+                    </button>
+                  </td>
+                </tr>
+              ))}
           </tbody>
         </table>
       </div>
