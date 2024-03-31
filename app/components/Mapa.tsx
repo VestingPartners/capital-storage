@@ -54,7 +54,7 @@ export default function Mapa() {
 
   return isLoaded ? (
     <div className="flex gap-6">
-      <div className="w-min p-4 rounded-lg bg-[#f6f6f6] shadow-sm border border-black/5">
+      <div className="w-min p-4 rounded-lg bg-white shadow-sm border border-black/5">
         <GoogleMap
           mapContainerStyle={{ ...containerStyle, borderRadius: "0.3rem" }}
           center={center}
@@ -68,7 +68,7 @@ export default function Mapa() {
         </GoogleMap>
       </div>
 
-      <div className="w-full bg-[#f6f6f6] shadow-sm border border-black/5 rounded-lg p-4">
+      <div className="w-full bg-white shadow-sm border border-black/5 rounded-lg p-4">
         <div className="flex gap-4">
           <Button
             variant={folson === true ? "primary" : "secondary"}

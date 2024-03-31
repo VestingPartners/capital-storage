@@ -59,7 +59,7 @@ const valueFormatter = function (number: any) {
 
 export function LineChart() {
   return (
-    <div className="card w-full rounded-md p-5 bg-[#f6f6f6] shadow-sm border border-black/5">
+    <div className="card w-full rounded-md p-5 bg-white shadow-sm border border-black/5">
       <div className="flex gap-6">
         <div className="flex flex-col justify-center items-center">
           <h3 className="text-tremor-default text-tremor-content">

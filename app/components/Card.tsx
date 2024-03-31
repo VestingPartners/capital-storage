@@ -9,7 +9,7 @@ import {
 
 export default function Card() {
   return (
-    <div className="card w-[500px] rounded-md p-5 bg-[#f6f6f6] shadow-sm border border-black/5">
+    <div className="card w-[500px] rounded-md p-5  shadow-sm border border-black/5 bg-white">
       <div className="mx-auto max-w-2xl">
         <Table>
           <TableHead>
