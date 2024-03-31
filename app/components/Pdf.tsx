@@ -9,7 +9,7 @@ export default function Pdf() {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <div className="card w-full border border-white/25 rounded-md p-5 flex gap-x-6">
+    <div className="card w-full  rounded-md p-5 flex gap-x-6 ">
       <div className="w-full flex gap-x-6">
         <Card className="text-tremor-default  flex items-center justify-between ">
           <p className="bg-transparent">deposito-abril.pdf</p>

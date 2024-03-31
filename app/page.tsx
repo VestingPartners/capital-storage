@@ -11,9 +11,7 @@ export default function Home() {
         <Card />
       </div>
 
-      <div className=" mt-12">
-        <Pdf />
-      </div>
+      <div className=" mt-12">{/* <Pdf /> */}</div>
 
       <div className=" my-12">
         <Mapa />

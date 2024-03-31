@@ -59,22 +59,52 @@ const valueFormatter = function (number: any) {
 
 export function LineChart() {
   return (
-    <div className="card w-full border border-white/25 rounded-md p-5">
-      <h3 className="text-tremor-default text-tremor-content dark:text-dark-tremor-content">
-        Capital Total
-      </h3>
-      <p className="text-tremor-metric text-tremor-content-strong dark:text-dark-tremor-content-strong font-semibold">
-        $3,736
-      </p>
+    <div className="card w-full rounded-md p-5 bg-[#f6f6f6] shadow-sm border border-black/5">
+      <div className="flex gap-6">
+        <div className="flex flex-col justify-center items-center">
+          <h3 className="text-tremor-default text-tremor-content">
+            Capital Total
+          </h3>
+          <p className="text-tremor-metric text-tremor-content-strong  font-semibold">
+            $60.000
+          </p>
+        </div>
+        <div className="flex flex-col justify-center items-center">
+          <h1 className=" text-tremor-default text-tremor-content">
+            Inversiones
+          </h1>
+          <p className="text-tremor-metric text-tremor-content-strong  font-semibold">
+            2
+          </p>
+        </div>
+        <div className="flex flex-col justify-center items-center">
+          <h1 className=" text-tremor-default text-tremor-content">
+            Invertido
+          </h1>
+          <p className="text-tremor-metric text-tremor-content-strong  font-semibold">
+            $50.000
+          </p>
+        </div>
+        <div className="flex flex-col justify-center items-center w-max">
+          <h1 className=" text-tremor-default text-tremor-content">
+            Sin invertir
+          </h1>
+          <p className="text-tremor-metric text-tremor-content-strong  font-semibold">
+            $10.000
+          </p>
+        </div>
+      </div>
       <AreaChart
         className="mt-4 h-72"
         data={chartdata}
         index="date"
         yAxisWidth={65}
         categories={["Evolución del patrimonio"]}
-        colors={["indigo", "cyan"]}
+        colors={["blue", "cyan"]}
         valueFormatter={valueFormatter}
       />
+
+      <div className="mt-6 w-min "></div>
     </div>
   );
 }
