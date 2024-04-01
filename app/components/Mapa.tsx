@@ -99,8 +99,8 @@ export default function Mapa() {
           <div className="mt-4 flex gap-4 items-start">
             <Image
               src="/Folsom Street.jpg"
-              width={480}
-              height={600}
+              width={320}
+              height={500}
               alt="Folsom Street"
             />
 
