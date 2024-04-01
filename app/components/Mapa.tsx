@@ -53,12 +53,16 @@ export default function Mapa() {
   };
 
   return isLoaded ? (
-    <div className="flex gap-6">
-      <div className="w-min p-4 rounded-lg bg-white shadow-sm border border-black/5">
+    <div className="flex flex-col gap-6 w-full">
+      <div className="w-full h-fit p-4 rounded-lg bg-white shadow-sm border border-black/5">
         <GoogleMap
-          mapContainerStyle={{ ...containerStyle, borderRadius: "0.3rem" }}
+          mapContainerStyle={{
+            ...containerStyle,
+            borderRadius: "0.3rem",
+            width: "100%",
+          }}
           center={center}
-          zoom={10}
+          zoom={0.8}
           onLoad={onLoad}
           onUnmount={onUnmount}
         >
@@ -68,11 +72,11 @@ export default function Mapa() {
         </GoogleMap>
       </div>
 
-      <div className="w-full bg-white shadow-sm border border-black/5 rounded-lg p-4">
+      <div className="w-full h-[315px] bg-white shadow-sm border border-black/5 rounded-lg p-4">
         <div className="flex gap-4">
           <Button
             variant={folson === true ? "primary" : "secondary"}
-            icon={RiSearch2Line}
+            // icon={RiSearch2Line}
             onClick={() =>
               moveToLocation(locations[0].lat, locations[0].lng, true)
             }
@@ -82,7 +86,7 @@ export default function Mapa() {
           </Button>
           <Button
             variant={folson === false ? "primary" : "secondary"}
-            icon={RiSearch2Line}
+            // icon={RiSearch2Line}
             onClick={() =>
               moveToLocation(locations[1].lat, locations[1].lng, false)
             }
@@ -100,7 +104,7 @@ export default function Mapa() {
               alt="Folsom Street"
             />
 
-            <div className="flex flex-col justify-start items-start  p-6 w-full">
+            <div className="flex flex-col justify-start items-start  px-6 w-full">
               <h2 className="text-2xl font-semibold mb-4">
                 Detalles del Fondo
               </h2>
@@ -115,12 +119,7 @@ export default function Mapa() {
               <p className="text-lg mb-2">
                 <span className="font-semibold">Dividendos:</span> - $0
               </p>
-              <p className="text-lg mb-2">
-                <span className="font-semibold">
-                  Documentos Inversionistas:
-                </span>{" "}
-                En desarrollo
-              </p>
+
               <p className="text-lg">
                 <span className="font-semibold">Dirección:</span> 1844 Folsom
                 Street Boulder, CO 80302
@@ -129,9 +128,9 @@ export default function Mapa() {
           </div>
         ) : (
           <div className="mt-4 flex gap-4 items-start">
-            <Image src="/30 street.jpg" width={590} height={600} alt="d" />
+            <Image src="/30 street.jpg" width={420} height={440} alt="d" />
 
-            <div className="flex flex-col justify-start items-start  p-6 w-full h-max">
+            <div className="flex flex-col justify-start items-start py-2 px-6 w-full h-max">
               <h2 className="text-2xl font-semibold mb-4">
                 Detalles del Fondo
               </h2>

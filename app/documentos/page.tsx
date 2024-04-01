@@ -14,15 +14,22 @@ export default function DocumentosPage() {
     {
       nombre:
         "DV INVERSIONES Y ASESORIAS- Correction (Subscription Agreement).doc.pdf",
-      tipo: "Informe",
+      tipo: "Legal",
       inversion: "Folsom North Limited",
       fecha: "2022-01-01",
       link: "https://ttxvolraillgucvjjsen.supabase.co/storage/v1/object/public/pdfs/DV%20INVERSIONES%20Y%20ASESORIAS-%20Correction%20(Subscription%20Agreement).doc.pdf",
     },
     {
+      nombre: "WrtnStmnt-2024-03-01-G1_v1 (informe).pdf",
+      tipo: "Informe",
+      inversion: "Red Rocks Limited",
+      fecha: "2022-02-01",
+      link: "https://ttxvolraillgucvjjsen.supabase.co/storage/v1/object/public/pdfs/Subscription%20Agreement%20-%20DV%20INVERSIONES%20Y%20ASESORIAS%20SA%20-%20Red%20Rocks%20LP.docx.pdf",
+    },
+    {
       nombre:
         "Subscription Agreement - DV INVERSIONES Y ASESORIAS SA - Red Rocks LP.docx.pdf",
-      tipo: "Contrato",
+      tipo: "Informe",
       inversion: "Red Rocks Limited",
       fecha: "2022-02-01",
       link: "https://ttxvolraillgucvjjsen.supabase.co/storage/v1/object/public/pdfs/Subscription%20Agreement%20-%20DV%20INVERSIONES%20Y%20ASESORIAS%20SA%20-%20Red%20Rocks%20LP.docx.pdf",
