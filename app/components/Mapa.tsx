@@ -82,7 +82,7 @@ export default function Mapa() {
             }
             className="h-min"
           >
-            Folsom North Limited
+            Folsom
           </Button>
           <Button
             variant={folson === false ? "primary" : "secondary"}
@@ -92,7 +92,7 @@ export default function Mapa() {
             }
             className="h-min"
           >
-            Red Rocks Limited
+            30 th Street
           </Button>
         </div>
         {folson ? (

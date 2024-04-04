@@ -15,14 +15,14 @@ export default function DocumentosPage() {
       nombre:
         "DV INVERSIONES Y ASESORIAS- Correction (Subscription Agreement).doc.pdf",
       tipo: "Legal",
-      inversion: "Folsom North Limited",
+      inversion: "Folsom",
       fecha: "2022-01-01",
       link: "https://ttxvolraillgucvjjsen.supabase.co/storage/v1/object/public/pdfs/DV%20INVERSIONES%20Y%20ASESORIAS-%20Correction%20(Subscription%20Agreement).doc.pdf",
     },
     {
       nombre: "WrtnStmnt-2024-03-01-G1_v1 (informe).pdf",
       tipo: "Informe",
-      inversion: "Red Rocks Limited",
+      inversion: "30 th Street",
       fecha: "2022-02-01",
       link: "https://ttxvolraillgucvjjsen.supabase.co/storage/v1/object/public/pdfs/Subscription%20Agreement%20-%20DV%20INVERSIONES%20Y%20ASESORIAS%20SA%20-%20Red%20Rocks%20LP.docx.pdf",
     },
@@ -30,7 +30,7 @@ export default function DocumentosPage() {
       nombre:
         "Subscription Agreement - DV INVERSIONES Y ASESORIAS SA - Red Rocks LP.docx.pdf",
       tipo: "Informe",
-      inversion: "Red Rocks Limited",
+      inversion: "30 th Street",
       fecha: "2022-02-01",
       link: "https://ttxvolraillgucvjjsen.supabase.co/storage/v1/object/public/pdfs/Subscription%20Agreement%20-%20DV%20INVERSIONES%20Y%20ASESORIAS%20SA%20-%20Red%20Rocks%20LP.docx.pdf",
     },
@@ -42,17 +42,31 @@ export default function DocumentosPage() {
     setFiltroActivo(value);
   };
 
+  const filtrarPorInversion = (inversion) => {
+    setFiltroActivo(inversion);
+  };
+
+  const filtrarDocumentos = () => {
+    return documentos.filter((doc) => {
+      if (filtroActivo === "Todos") return true; // Si el filtro está en "Todos", mostrar todos los documentos
+      if (filtroActivo === "Folsom" || filtroActivo === "30 th Street") {
+        return doc.inversion === filtroActivo; // Filtrar por inversión si se selecciona Folsom o Red Rocks
+      }
+      return doc.tipo === filtroActivo; // De lo contrario, filtrar por tipo de documento
+    });
+  };
+
   return (
     <div className="container mx-auto px-4 py-8">
       <h2 className="text-2xl font-semibold mb-4">Listado de Documentos</h2>
 
       {/* Selector de tipos de documentos ajustado para usar onValueChange */}
-      <div className="mb-4 w-44">
+      <div className="mb-4 flex gap-4">
         <Select
           value={filtroActivo}
-          onValueChange={handleSelectChange} // Ajuste aquí
+          onValueChange={setFiltroActivo} // Ajuste aquí
           placeholder="Seleccione un tipo"
-          className="bg-white"
+          className="bg-white w-24"
         >
           {tipos.map((tipo) => (
             <SelectItem key={tipo} value={tipo}>
@@ -60,6 +74,22 @@ export default function DocumentosPage() {
             </SelectItem>
           ))}
         </Select>
+
+        <Button
+          variant="secondary"
+          onClick={() => filtrarPorInversion("Folsom")}
+        >
+          Folsom
+        </Button>
+        <Button
+          variant="secondary"
+          onClick={() => filtrarPorInversion("30 th Street")}
+        >
+          30 th Street
+        </Button>
+        <Button variant="secondary" onClick={() => setFiltroActivo("Todos")}>
+          Todos
+        </Button>
       </div>
 
       <div className="overflow-x-auto">
@@ -75,29 +105,25 @@ export default function DocumentosPage() {
             </tr>
           </thead>
           <tbody>
-            {documentos
-              .filter(
-                (doc) => filtroActivo === "Todos" || doc.tipo === filtroActivo
-              )
-              .map((documento, index) => (
-                <tr
-                  key={index}
-                  className={`${index % 2 === 0 ? "bg-gray-100" : "bg-white"}`}
-                >
-                  <td className="border px-4 py-2">{documento.nombre}</td>
-                  <td className="border px-4 py-2">{documento.tipo}</td>
-                  <td className="border px-4 py-2">{documento.inversion}</td>
-                  <td className="border px-4 py-2">{documento.fecha}</td>
-                  <td className="border px-4 py-2 flex justify-center">
-                    <button
-                      className="px-4 py-2 rounded hover:bg-blue-500 transition duration-150 ease-in-out underline"
-                      onClick={() => setDocumentoActivo(documento)}
-                    >
-                      Ver Pdf
-                    </button>
-                  </td>
-                </tr>
-              ))}
+            {filtrarDocumentos().map((documento, index) => (
+              <tr
+                key={index}
+                className={`${index % 2 === 0 ? "bg-gray-100" : "bg-white"}`}
+              >
+                <td className="border px-4 py-2">{documento.nombre}</td>
+                <td className="border px-4 py-2">{documento.tipo}</td>
+                <td className="border px-4 py-2">{documento.inversion}</td>
+                <td className="border px-4 py-2">{documento.fecha}</td>
+                <td className="border px-4 py-2 flex justify-center">
+                  <button
+                    className="px-4 py-2 rounded hover:bg-blue-500 transition duration-150 ease-in-out underline"
+                    onClick={() => setDocumentoActivo(documento)}
+                  >
+                    Ver Pdf
+                  </button>
+                </td>
+              </tr>
+            ))}
           </tbody>
         </table>
       </div>
