@@ -4,10 +4,12 @@ const inversiones2 = [
   {
     name: "Folsom",
     value: 80000,
+    color: "#3d5890", // Color para Folsom
   },
   {
     name: "30 th Street",
     value: 50000,
+    color: "#43903d", // Color para 30 th Street
   },
 ];
 
@@ -42,13 +44,13 @@ export default function Informe() {
       {/* Barra de inversión combinada */}
       <div className="mt-4 w-full bg-gray-200 rounded-full h-8 relative">
         <div
-          className="bg-blue-600 h-8 rounded-l-full absolute flex items-center justify-center text-[10px] text-white font-semibold"
+          className="bg-[#3d5890] h-8 rounded-l-full absolute flex items-center justify-center text-[10px] text-white font-semibold"
           style={{ width: `${porcentajeFolsom}%` }}
         >
           Folsom: $80.000 ({porcentajeFolsom.toFixed(2)}%)
         </div>
         <div
-          className="bg-green-600 h-8 rounded-r-full absolute right-0 flex items-center justify-center text-[10px] text-white font-semibold"
+          className="bg-[#43903d] h-8 rounded-r-full absolute right-0 flex items-center justify-center text-[10px] text-white font-semibold"
           style={{ width: `${porcentajeRedRocks}%` }}
         >
           30 th Street: $50.000 ({porcentajeRedRocks.toFixed(2)}%)
@@ -58,6 +60,14 @@ export default function Informe() {
         data={inversiones2}
         variant="pie"
         className=" mt-4"
+        colors={[
+          "blue-900",
+          "green-700",
+          "blue-700",
+          "blue-600",
+          "blue-500",
+          "blue-400",
+        ]}
         // valueFormatter={dataFormatter}
         // onValueChange={(v) => console.log(v)}
       />

@@ -90,7 +90,7 @@ export default function Mapa() {
             onClick={() =>
               moveToLocation(locations[1].lat, locations[1].lng, false)
             }
-            className="h-min"
+            className="h-min "
           >
             30 th Street
           </Button>
@@ -104,25 +104,21 @@ export default function Mapa() {
               alt="Folsom Street"
             />
 
-            <div className="flex flex-col justify-start items-start  px-6 w-full">
-              <h2 className="text-2xl font-semibold mb-4">
-                Detalles del Fondo
-              </h2>
+            <div className="flex flex-col justify-start items-start py-2 px-6 w-full h-max">
+              <h2 className="text-2xl font-semibold mb-4">Snapshot Fondo</h2>
               <p className="text-lg mb-2">
-                <span className="font-semibold">Tamaño del fondo:</span> US$
-                9.156.751
+                <span className="font-semibold">Tipo de proyecto: </span>
+                Multifamily
               </p>
               <p className="text-lg mb-2">
-                <span className="font-semibold">Aporte inversionista:</span>{" "}
-                $80.000, diciembre 23
+                <span className="font-semibold">Unidades: </span>
+                227
               </p>
               <p className="text-lg mb-2">
-                <span className="font-semibold">Dividendos:</span> - $0
+                <span className="font-semibold">Equity total:</span> 91 M
               </p>
-
               <p className="text-lg">
-                <span className="font-semibold">Dirección:</span> 1844 Folsom
-                Street Boulder, CO 80302
+                <span className="font-semibold">Entrega Estimada: </span>
               </p>
             </div>
           </div>
@@ -131,23 +127,20 @@ export default function Mapa() {
             <Image src="/30 street.jpg" width={420} height={440} alt="d" />
 
             <div className="flex flex-col justify-start items-start py-2 px-6 w-full h-max">
-              <h2 className="text-2xl font-semibold mb-4">
-                Detalles del Fondo
-              </h2>
+              <h2 className="text-2xl font-semibold mb-4">Snapshot Fondo</h2>
               <p className="text-lg mb-2">
-                <span className="font-semibold">Tamaño del fondo:</span> US$
-                3.351.369
+                <span className="font-semibold">Tipo de proyecto: </span>
+                Multifamily
               </p>
               <p className="text-lg mb-2">
-                <span className="font-semibold">Aporte inversionista:</span>{" "}
-                $50.000, Marzo 22
+                <span className="font-semibold">Unidades: </span>
+                227
               </p>
               <p className="text-lg mb-2">
-                <span className="font-semibold">Dividendos:</span> - $0
+                <span className="font-semibold">Equity total:</span> 91 M
               </p>
               <p className="text-lg">
-                <span className="font-semibold">Dirección:</span> 2555 30th
-                Street Boulder, CO 80301
+                <span className="font-semibold">Entrega Estimada:</span>
               </p>
             </div>
           </div>
