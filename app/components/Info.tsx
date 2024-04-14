@@ -36,10 +36,11 @@ export default function Informe() {
         DV Inversiones y Asesorías S.A.
       </p>
       <h3 className="mt-4 text-lg flex">
-        Capital Total: <p className="ml-2 text-lg font-semibold">$130.000</p>
+        Capital total invertido:
+        <p className="ml-2 text-lg font-semibold">USD $130.000</p>
       </h3>
       <h3 className="mt-2 text-lg flex">
-        Inversiones: <p className="ml-2 text-lg font-semibold">2</p>
+        Inversiones vigentes: <p className="ml-2 text-lg font-semibold">2</p>
       </h3>
       {/* Barra de inversión combinada */}
       <div className="mt-4 w-full bg-gray-200 rounded-full h-8 relative">
@@ -53,7 +54,7 @@ export default function Informe() {
           className="bg-[#43903d] h-8 rounded-r-full absolute right-0 flex items-center justify-center text-[10px] text-white font-semibold"
           style={{ width: `${porcentajeRedRocks}%` }}
         >
-          30 th Street: $50.000 ({porcentajeRedRocks.toFixed(2)}%)
+          30th Street: $50.000 ({porcentajeRedRocks.toFixed(2)}%)
         </div>
       </div>
       <DonutChart

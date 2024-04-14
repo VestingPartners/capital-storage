@@ -92,7 +92,7 @@ export default function Mapa() {
             }
             className="h-min "
           >
-            30 th Street
+            30th Street
           </Button>
         </div>
         {folson ? (
@@ -111,11 +111,12 @@ export default function Mapa() {
                 Multifamily
               </p>
               <p className="text-lg mb-2">
-                <span className="font-semibold">Unidades: </span>
+                <span className="font-semibold">Unidades estimadas: </span>
                 227
               </p>
               <p className="text-lg mb-2">
-                <span className="font-semibold">Equity total:</span> 91 M
+                <span className="font-semibold">Equity total:</span> USD
+                $10.200.000
               </p>
               <p className="text-lg">
                 <span className="font-semibold">Entrega Estimada: </span>
@@ -133,11 +134,12 @@ export default function Mapa() {
                 Multifamily
               </p>
               <p className="text-lg mb-2">
-                <span className="font-semibold">Unidades: </span>
+                <span className="font-semibold">Unidades estimadas: </span>
                 227
               </p>
               <p className="text-lg mb-2">
-                <span className="font-semibold">Equity total:</span> 91 M
+                <span className="font-semibold">Equity total:</span> USD
+                $10.200.000
               </p>
               <p className="text-lg">
                 <span className="font-semibold">Entrega Estimada:</span>
