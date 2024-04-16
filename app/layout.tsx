@@ -21,7 +21,7 @@ export default function RootLayout({
       <body className={inter.className}>
         <ThemeProvider attribute="class" disableTransitionOnChange>
           <Navbar />
-          {children}
+          <div>{children}</div>
         </ThemeProvider>
       </body>
     </html>
