@@ -35,7 +35,8 @@ export default async function SelectPage() {
             >
               <h2 className="text-xl font-bold mb-2">{item.Inversionista}</h2>
               <p className="text-gray-600 mb-4">
-                Total Inversiones: ${item["Total Inversiones"]}
+                Total Inversiones: USD $
+                {item["Total Inversiones"].toLocaleString("es-ES")}
               </p>
             </Link>
           ))}

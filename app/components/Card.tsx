@@ -81,7 +81,7 @@ export default function Card({ data }) {
               <TableRow key={index}>
                 <TableCell>{aporte.proyecto}</TableCell>
                 <TableCell>{formatDate(aporte.fecha)}</TableCell>
-                <TableCell>{formatCurrency(aporte.monto)}</TableCell>
+                <TableCell>USD {formatCurrency(aporte.monto)}</TableCell>
                 <TableCell className=" text-center">
                   {aporte.dividendos}
                 </TableCell>
