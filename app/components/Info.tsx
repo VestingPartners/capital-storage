@@ -1,23 +1,22 @@
 import { DonutChart } from "@tremor/react";
 
-const inversiones2 = [
-  {
-    name: "Folsom",
-    value: 80000,
-    color: "#3d5890", // Color para Folsom
-  },
-  {
-    name: "30 th Street",
-    value: 50000,
-    color: "#43903d", // Color para 30 th Street
-  },
-];
-
-export default function Informe() {
+export default function Informe({ data }: any) {
+  const inversiones2 = [
+    {
+      name: "Folsom",
+      value: data[0]["Total Invertido Folsom"],
+      color: "#3d5890", // Color para Folsom
+    },
+    {
+      name: "30 th Street",
+      value: data[0]["Total Invertido 30 Street"],
+      color: "#43903d", // Color para 30 th Street
+    },
+  ].filter((inv) => inv.value > 0);
   // Suponiendo que estos son los montos de inversión
   const inversiones = {
-    folsom: 80000,
-    redRocks: 50000,
+    folsom: data[0]["Total Invertido Folsom"],
+    thirtiethStreet: data[0]["Total Invertido 30 Street"],
   };
 
   // Calculando el total para usar en el cálculo del porcentaje
@@ -28,50 +27,67 @@ export default function Informe() {
 
   // Calculando los porcentajes de inversión
   const porcentajeFolsom = (inversiones.folsom / totalInversiones) * 100;
-  const porcentajeRedRocks = (inversiones.redRocks / totalInversiones) * 100;
+  const porcentajeThirtiethStreet =
+    (inversiones.thirtiethStreet / totalInversiones) * 100;
 
+  const mostrarDonutChart = inversiones2.length > 1;
   return (
     <div className="card w-[480px] h-fit rounded-md p-5 shadow-sm border border-black/5 bg-white flex flex-col">
       <p className="text-xl font-bold w-full text-center">
-        DV Inversiones y Asesorías S.A.
+        {data[0].Inversionista}
       </p>
       <h3 className="mt-4 text-lg flex">
         Capital total invertido:
-        <p className="ml-2 text-lg font-semibold">USD $130.000</p>
+        <p className="ml-2 text-lg font-semibold">
+          USD ${data[0]["Total Inversiones"].toLocaleString("es-ES")}
+        </p>
       </h3>
       <h3 className="mt-2 text-lg flex">
-        Inversiones vigentes: <p className="ml-2 text-lg font-semibold">2</p>
+        Inversiones vigentes:{" "}
+        <p className="ml-2 text-lg font-semibold">{data[0].Inversiones}</p>
       </h3>
       {/* Barra de inversión combinada */}
       <div className="mt-4 w-full bg-gray-200 rounded-full h-8 relative">
-        <div
-          className="bg-[#3d5890] h-8 rounded-l-full absolute flex items-center justify-center text-[10px] text-white font-semibold"
-          style={{ width: `${porcentajeFolsom}%` }}
-        >
-          Folsom: $80.000 ({porcentajeFolsom.toFixed(2)}%)
-        </div>
-        <div
-          className="bg-[#43903d] h-8 rounded-r-full absolute right-0 flex items-center justify-center text-[10px] text-white font-semibold"
-          style={{ width: `${porcentajeRedRocks}%` }}
-        >
-          30th Street: $50.000 ({porcentajeRedRocks.toFixed(2)}%)
-        </div>
+        {inversiones.folsom > 0 && (
+          <div
+            className={`bg-[#3d5890] h-8 ${
+              inversiones.thirtiethStreet > 0
+                ? "rounded-l-full"
+                : "rounded-full"
+            } absolute flex items-center justify-center text-[10px] text-white font-semibold`}
+            style={{ width: `${porcentajeFolsom}%` }}
+          >
+            Folsom: ${inversiones.folsom.toLocaleString()} (
+            {porcentajeFolsom.toFixed(2)}%)
+          </div>
+        )}
+        {inversiones.thirtiethStreet > 0 && (
+          <div
+            className={`bg-[#43903d] h-8 ${
+              inversiones.folsom > 0 ? "rounded-r-full" : "rounded-full"
+            } absolute right-0 flex items-center justify-center text-[10px] text-white font-semibold`}
+            style={{ width: `${porcentajeThirtiethStreet}%` }}
+          >
+            30th Street: ${inversiones.thirtiethStreet.toLocaleString()} (
+            {porcentajeThirtiethStreet.toFixed(2)}%)
+          </div>
+        )}
       </div>
-      <DonutChart
-        data={inversiones2}
-        variant="pie"
-        className=" mt-4"
-        colors={[
-          "blue-900",
-          "green-700",
-          "blue-700",
-          "blue-600",
-          "blue-500",
-          "blue-400",
-        ]}
-        // valueFormatter={dataFormatter}
-        // onValueChange={(v) => console.log(v)}
-      />
+      {mostrarDonutChart && (
+        <DonutChart
+          data={inversiones2}
+          variant="pie"
+          className=" mt-4"
+          colors={[
+            "blue-900",
+            "green-700",
+            "blue-700",
+            "blue-600",
+            "blue-500",
+            "blue-400",
+          ]}
+        />
+      )}
     </div>
   );
 }

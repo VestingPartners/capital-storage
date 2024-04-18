@@ -23,8 +23,29 @@ const locations = [
   { lat: 40.026993950936536, lng: -105.25426364327721 }, // Red Rocks Limited
 ];
 
-export default function Mapa() {
-  const [folson, setFolson] = useState(true); // Corregido aquí
+export default function Mapa({ data }) {
+  const projectDetails = {
+    Folsom: {
+      image: "/Folsom Street.jpg",
+      width: 320,
+      height: 500,
+      units: "227",
+      equity: "USD $10.200.000",
+      delivery: "Marzo 2028",
+    },
+    "30th Street": {
+      image: "/30 street.jpg",
+      width: 420,
+      height: 440,
+      units: "143",
+      equity: "USD $3.500.000",
+      delivery: "Noviembre 2027",
+    },
+  };
+
+  const defaultProject =
+    data[0]["Total Invertido Folsom"] > 0 ? "Folsom" : "30th Street";
+  const [selectedProject, setSelectedProject] = useState(defaultProject);
 
   const { isLoaded } = useJsApiLoader({
     id: "google-map-script",
@@ -46,10 +67,10 @@ export default function Mapa() {
     setMap(null);
   }, []);
 
-  const moveToLocation = (lat, lng, isFolson) => {
+  const moveToLocation = (lat, lng, project) => {
     map?.panTo({ lat, lng });
     map?.setZoom(15);
-    setFolson(isFolson); // Actualizar el estado basado en qué botón se presionó
+    setSelectedProject(project);
   };
 
   return isLoaded ? (
@@ -72,81 +93,102 @@ export default function Mapa() {
         </GoogleMap>
       </div>
 
-      <div className="w-full h-[315px] bg-white shadow-sm border border-black/5 rounded-lg p-4">
-        <div className="flex gap-4">
-          <Button
-            variant={folson === true ? "primary" : "secondary"}
-            // icon={RiSearch2Line}
-            onClick={() =>
-              moveToLocation(locations[0].lat, locations[0].lng, true)
-            }
-            className="h-min"
-          >
-            Folsom
-          </Button>
-          <Button
-            variant={folson === false ? "primary" : "secondary"}
-            // icon={RiSearch2Line}
-            onClick={() =>
-              moveToLocation(locations[1].lat, locations[1].lng, false)
-            }
-            className="h-min "
-          >
-            30th Street
-          </Button>
+      <div className="w-full bg-white shadow-sm border border-black/5 rounded-lg p-4">
+        <div className="flex gap-4 items-center mb-4">
+          {data[0]["Total Invertido Folsom"] != null && (
+            <Button
+              variant={selectedProject === "Folsom" ? "primary" : "secondary"}
+              onClick={() =>
+                moveToLocation(locations[1].lat, locations[1].lng, "Folsom")
+              }
+            >
+              Folsom
+            </Button>
+          )}
+
+          {data[0]["Total Invertido 30 Street"] != null && (
+            <Button
+              variant={
+                selectedProject === "30th Street" ? "primary" : "secondary"
+              }
+              onClick={() =>
+                moveToLocation(
+                  locations[1].lat,
+                  locations[1].lng,
+                  "30th Street"
+                )
+              }
+            >
+              30th Street
+            </Button>
+          )}
         </div>
-        {folson ? (
-          <div className="mt-4 flex gap-4 items-start">
-            <Image
-              src="/Folsom Street.jpg"
-              width={320}
-              height={500}
-              alt="Folsom Street"
-            />
 
-            <div className="flex flex-col justify-start items-start py-2 px-6 w-full h-max">
-              <h2 className="text-2xl font-semibold mb-4">Snapshot Fondo</h2>
-              <p className="text-lg mb-2">
-                <span className="font-semibold">Tipo de proyecto: </span>
-                Multifamily
-              </p>
-              <p className="text-lg mb-2">
-                <span className="font-semibold">Unidades estimadas: </span>
-                227
-              </p>
-              <p className="text-lg mb-2">
-                <span className="font-semibold">Equity total:</span> USD
-                $10.200.000
-              </p>
-              <p className="text-lg">
-                <span className="font-semibold">Entrega Estimada: </span>
-              </p>
+        <div className="flex gap-8">
+          {selectedProject === "Folsom" && (
+            <div className="flex">
+              <Image
+                src="/Folsom Street.jpg"
+                width={300} // Ajustar según sea necesario
+                height={200} // Ajustar según sea necesario
+                alt="Folsom Street"
+                className="rounded-lg"
+              />
+              <div className="flex flex-col justify-start items-start py-2 px-6">
+                <h2 className="text-2xl font-semibold mb-4">
+                  Snapshot Fondo Folsom
+                </h2>
+                <p className="text-lg mb-2">
+                  <span className="font-semibold">Tipo de proyecto: </span>
+                  Multifamily
+                </p>
+                <p className="text-lg mb-2">
+                  <span className="font-semibold">Unidades estimadas: </span>227
+                </p>
+                <p className="text-lg mb-2">
+                  <span className="font-semibold">Equity total:</span> USD
+                  $10.200.000
+                </p>
+                <p className="text-lg">
+                  <span className="font-semibold">Entrega Estimada: </span>Marzo
+                  2028
+                </p>
+              </div>
             </div>
-          </div>
-        ) : (
-          <div className="mt-4 flex gap-4 items-start">
-            <Image src="/30 street.jpg" width={420} height={440} alt="d" />
+          )}
 
-            <div className="flex flex-col justify-start items-start py-2 px-6 w-full h-max">
-              <h2 className="text-2xl font-semibold mb-4">Snapshot Fondo</h2>
-              <p className="text-lg mb-2">
-                <span className="font-semibold">Tipo de proyecto: </span>
-                Multifamily
-              </p>
-              <p className="text-lg mb-2">
-                <span className="font-semibold">Unidades estimadas: </span>
-                227
-              </p>
-              <p className="text-lg mb-2">
-                <span className="font-semibold">Equity total:</span> USD
-                $10.200.000
-              </p>
-              <p className="text-lg">
-                <span className="font-semibold">Entrega Estimada:</span>
-              </p>
+          {selectedProject === "30th Street" && (
+            <div className="flex">
+              <Image
+                src="/30 street.jpg"
+                width={300} // Ajustar según sea necesario
+                height={200} // Ajustar según sea necesario
+                alt="30th Street"
+                className="rounded-lg"
+              />
+              <div className="flex flex-col justify-start items-start py-2 px-6">
+                <h2 className="text-2xl font-semibold mb-4">
+                  Snapshot Fondo 30th Street
+                </h2>
+                <p className="text-lg mb-2">
+                  <span className="font-semibold">Tipo de proyecto: </span>
+                  Multifamily
+                </p>
+                <p className="text-lg mb-2">
+                  <span className="font-semibold">Unidades estimadas: </span>143
+                </p>
+                <p className="text-lg mb-2">
+                  <span className="font-semibold">Equity total:</span> USD
+                  $3.500.000
+                </p>
+                <p className="text-lg">
+                  <span className="font-semibold">Entrega Estimada:</span>{" "}
+                  Noviembre 2027
+                </p>
+              </div>
             </div>
-          </div>
-        )}
+          )}
+        </div>
       </div>
     </div>
   ) : (

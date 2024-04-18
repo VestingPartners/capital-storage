@@ -1,156 +1,289 @@
-// @ts-nocheck
+import { Button, Select, SelectItem } from "@tremor/react";
+import { createClient } from "@/lib/supabase/server";
+import Navbar from "../components/Navbar";
+import { redirect } from "next/navigation";
 
-"use client";
-
-import { useState } from "react";
-import { Button, Dialog, DialogPanel, Select, SelectItem } from "@tremor/react";
-
-export default function DocumentosPage() {
-  const [documentoActivo, setDocumentoActivo] = useState(null);
-  const [filtroActivo, setFiltroActivo] = useState("Todos"); // Ajuste para inicializar con "Todos"
-
-  // Documentos de prueba
-  const documentos = [
+function formatDocumentos(data: any) {
+  const documentosFormateados = [
     {
-      nombre:
-        "DV INVERSIONES Y ASESORIAS- Correction (Subscription Agreement).doc.pdf",
+      nombre: "Correccion Subs Legal 30 Street",
+      link: data[0]["Correccion Subs Legal 30 Street"],
+      tipo: "Legal",
+      inversion: "30th Street",
+    },
+    {
+      nombre: "Doc Subs Legal 30 Street",
+      link: data[0]["Doc Subs Legal 30 Street"],
+      tipo: "Legal",
+      inversion: "30th Street",
+    },
+    {
+      nombre: "Documentos Proyecto 30 Street",
+      link: data[0]["Documentos Proyecto 30 Street"],
+      tipo: "Proyecto",
+      inversion: "30th Street",
+    },
+    {
+      nombre: "Doc Legal 2 Folsom",
+      link: data[0]["Doc Legal 2 Folsom"],
       tipo: "Legal",
       inversion: "Folsom",
-      fecha: "2022-01-01",
-      link: "https://ttxvolraillgucvjjsen.supabase.co/storage/v1/object/public/pdfs/DV%20INVERSIONES%20Y%20ASESORIAS-%20Correction%20(Subscription%20Agreement).doc.pdf",
     },
     {
-      nombre: "WrtnStmnt-2024-03-01-G1_v1 (informe).pdf",
-      tipo: "Informe",
-      inversion: "30 th Street",
-      fecha: "2022-02-01",
-      link: "https://ttxvolraillgucvjjsen.supabase.co/storage/v1/object/public/pdfs/Subscription%20Agreement%20-%20DV%20INVERSIONES%20Y%20ASESORIAS%20SA%20-%20Red%20Rocks%20LP.docx.pdf",
-    },
-    {
-      nombre:
-        "Subscription Agreement - DV INVERSIONES Y ASESORIAS SA - Red Rocks LP.docx.pdf",
-      tipo: "Informe",
-      inversion: "30 th Street",
-      fecha: "2022-02-01",
-      link: "https://ttxvolraillgucvjjsen.supabase.co/storage/v1/object/public/pdfs/Subscription%20Agreement%20-%20DV%20INVERSIONES%20Y%20ASESORIAS%20SA%20-%20Red%20Rocks%20LP.docx.pdf",
+      nombre: "Doc Legal Folsom",
+      link: data[0]["Doc Legal Folsom"],
+      tipo: "Legal",
+      inversion: "Folsom",
     },
   ];
 
-  const tipos = ["Todos", ...new Set(documentos.map((doc) => doc.tipo))]; // Asegúrate de incluir "Todos"
-
-  const handleSelectChange = (value) => {
-    setFiltroActivo(value);
-  };
-
-  const filtrarPorInversion = (inversion) => {
-    setFiltroActivo(inversion);
-  };
-
-  const filtrarDocumentos = () => {
-    return documentos.filter((doc) => {
-      if (filtroActivo === "Todos") return true; // Si el filtro está en "Todos", mostrar todos los documentos
-      if (filtroActivo === "Folsom" || filtroActivo === "30 th Street") {
-        return doc.inversion === filtroActivo; // Filtrar por inversión si se selecciona Folsom o Red Rocks
+  if (data[0]["Documentos Proyecto Folsom"]) {
+    documentosFormateados.push(
+      {
+        nombre: "Reporte 1",
+        link: "https://bykoetjilbiepykdxnir.supabase.co/storage/v1/object/public/Documentos/Folsom/Documento%20Proyecto/CAPITAL%20STORAGE%20FUND%20III%20-%20FOLSOM%20VF.pdf?t=2024-04-16T01%3A28%3A24.295Z",
+        tipo: "Proyecto",
+        inversion: "Folsom",
+      },
+      {
+        nombre: "Reporte 2",
+        link: "https://bykoetjilbiepykdxnir.supabase.co/storage/v1/object/public/Documentos/Folsom/Documento%20Proyecto/CS%20Term%20Sheet%20Folsom%20House.pdf?t=2024-04-16T01%3A28%3A52.919Z",
+        tipo: "Proyecto",
+        inversion: "Folsom",
       }
-      return doc.tipo === filtroActivo; // De lo contrario, filtrar por tipo de documento
-    });
-  };
+    );
+  }
+
+  if (data[0]["Informes Mensuales 30 Street"]) {
+    documentosFormateados.push(
+      {
+        nombre: "Mayo 2022",
+        link: "https://bykoetjilbiepykdxnir.supabase.co/storage/v1/object/public/Documentos/30%20Street/Informes/Mensual/Update%20Mensual%20Mayo%202022.pdf?t=2024-04-15T16%3A42%3A26.922Z",
+        tipo: "Informes Mensual",
+        inversion: "30th Street",
+      },
+      {
+        nombre: "Abril 2022",
+        link: "https://bykoetjilbiepykdxnir.supabase.co/storage/v1/object/public/Documentos/30%20Street/Informes/Mensual/Update%20Mensual-%20Abril%202022.pdf?t=2024-04-15T16%3A46%3A08.176Z",
+        tipo: "Informes Mensual",
+        inversion: "30th Street",
+      },
+      {
+        nombre: "Julio 2022",
+        link: "https://bykoetjilbiepykdxnir.supabase.co/storage/v1/object/public/Documentos/30%20Street/Informes/Mensual/Update%20Mensual_%20Julio%202022.pdf?t=2024-04-15T16%3A46%3A47.667Z",
+        tipo: "Informes Mensual",
+        inversion: "30th Street",
+      },
+      {
+        nombre: "Noviembre 2022",
+        link: "https://bykoetjilbiepykdxnir.supabase.co/storage/v1/object/public/Documentos/30%20Street/Informes/Mensual/Update%20Mensual%20Noviembre%202022.pdf?t=2024-04-15T16%3A47%3A25.865Z",
+        tipo: "Informes Mensual",
+        inversion: "30th Street",
+      },
+      {
+        nombre: "Enero 2024",
+        link: "https://bykoetjilbiepykdxnir.supabase.co/storage/v1/object/public/Documentos/30%20Street/Informes/Mensual/Update%20Mensual%20Noviembre%202022.pdf?t=2024-04-15T16%3A47%3A25.865Z",
+        tipo: "Informes Mensual",
+        inversion: "30th Street",
+      },
+      {
+        nombre: "Marzo 2024",
+        link: "https://bykoetjilbiepykdxnir.supabase.co/storage/v1/object/public/Documentos/30%20Street/Informes/Mensual/Update%20mensual%20_%20Marzo%202024%20.pdf?t=2024-04-15T16%3A49%3A08.941Z",
+        tipo: "Informes Mensual",
+        inversion: "30th Street",
+      },
+      {
+        nombre: "Agosto 2022",
+        link: "https://bykoetjilbiepykdxnir.supabase.co/storage/v1/object/public/Documentos/30%20Street/Informes/Trimestral/30th%20Street%20-%20Agosto%202022.pdf?t=2024-04-15T16%3A52%3A11.828Z",
+        tipo: "Informe Trimestral",
+        inversion: "30th Street",
+      },
+      {
+        nombre: "Diciembre 2022",
+        link: "https://bykoetjilbiepykdxnir.supabase.co/storage/v1/object/public/Documentos/30%20Street/Informes/Trimestral/30th%20Street%20-%20Diciembre%202022.pdf?t=2024-04-15T16%3A52%3A16.294Z",
+        tipo: "Informe Trimestral",
+        inversion: "30th Street",
+      }
+    );
+  }
+  if (data[0]["Informes Trimestrales 30 Street"]) {
+    documentosFormateados.push(
+      {
+        nombre: "Agosto 2022",
+        link: "https://bykoetjilbiepykdxnir.supabase.co/storage/v1/object/public/Documentos/30%20Street/Informes/Trimestral/30th%20Street%20-%20Agosto%202022.pdf?t=2024-04-15T16%3A52%3A11.828Z",
+        tipo: "Informe Trimestral",
+        inversion: "30th Street",
+      },
+      {
+        nombre: "Diciembre 2022",
+        link: "https://bykoetjilbiepykdxnir.supabase.co/storage/v1/object/public/Documentos/30%20Street/Informes/Trimestral/30th%20Street%20-%20Diciembre%202022.pdf?t=2024-04-15T16%3A52%3A16.294Z",
+        tipo: "Informe Trimestral",
+        inversion: "30th Street",
+      }
+    );
+  }
+
+  if (data[0]["Informes Mensuales Folsom"]) {
+    documentosFormateados.push(
+      {
+        nombre: "Bienvenida",
+        link: "https://bykoetjilbiepykdxnir.supabase.co/storage/v1/object/public/Documentos/Folsom/Informes/Mensual/Bienvenida%20-%201844%20Folsom%20Street%20.pdf?t=2024-04-16T01%3A45%3A47.993Z",
+        tipo: "Informes Mensual",
+        inversion: "Folsom",
+      },
+      {
+        nombre: "Hecho Relevante",
+        link: "https://bykoetjilbiepykdxnir.supabase.co/storage/v1/object/public/Documentos/Folsom/Informes/Mensual/HECHO%20RELEVANTE%20-%201844%20FOLSOM.pdf?t=2024-04-16T01%3A46%3A53.112Z",
+        tipo: "Informes Mensual",
+        inversion: "Folsom",
+      },
+      {
+        nombre: "Mayo 2022",
+        link: "https://bykoetjilbiepykdxnir.supabase.co/storage/v1/object/public/Documentos/Folsom/Informes/Mensual/Update%20Mensual%20Mayo%202022.pdf?t=2024-04-16T01%3A47%3A35.423Z",
+        tipo: "Informes Mensual",
+        inversion: "Folsom",
+      },
+      {
+        nombre: "Noviembre 2022",
+        link: "https://bykoetjilbiepykdxnir.supabase.co/storage/v1/object/public/Documentos/30%20Street/Informes/Mensual/Update%20Mensual%20Noviembre%202022.pdf?t=2024-04-15T16%3A47%3A25.865Z",
+        tipo: "Informes Mensual",
+        inversion: "Folsom",
+      },
+      {
+        nombre: "Enero 2024",
+        link: "https://bykoetjilbiepykdxnir.supabase.co/storage/v1/object/public/Documentos/Folsom/Informes/Mensual/Update%20Mensual%20_%20Enero%202024.pdf?t=2024-04-16T01%3A48%3A12.989Z",
+        tipo: "Informes Mensual",
+        inversion: "Folsom",
+      },
+      {
+        nombre: "Marzo 2024",
+        link: "https://bykoetjilbiepykdxnir.supabase.co/storage/v1/object/public/Documentos/Folsom/Informes/Mensual/Update%20Mensual%20_%20Marzo%202024.pdf?t=2024-04-16T01%3A49%3A55.822Z",
+        tipo: "Informes Mensual",
+        inversion: "Folsom",
+      },
+      {
+        nombre: "Julio 2022",
+        link: "https://bykoetjilbiepykdxnir.supabase.co/storage/v1/object/public/Documentos/Folsom/Informes/Mensual/Update%20Mensual%20_%20Julio%202022.pdf?t=2024-04-16T01%3A48%3A38.225Z",
+        tipo: "Informes Mensual",
+        inversion: "Folsom",
+      }
+    );
+  }
+
+  if (data[0]["Informes Trimestrales Folsom"]) {
+    documentosFormateados.push(
+      {
+        nombre: "Abril 2023",
+        link: "https://bykoetjilbiepykdxnir.supabase.co/storage/v1/object/public/Documentos/Folsom/Informes/Trimestral/1844%20FOLSOM%20REPORTE%20TRIMESTRAL%20ABRIL%202023%20.pdf?t=2024-04-16T01%3A56%3A49.089Z",
+        tipo: "Informe Trimestral",
+        inversion: "Folsom",
+      },
+      {
+        nombre: "Agosto 2022",
+        link: "https://bykoetjilbiepykdxnir.supabase.co/storage/v1/object/public/Documentos/Folsom/Informes/Trimestral/1844%20FOLSOM%20REPORTE%20TRIMESTRAL%20AGOSTO%202022%20.pdf?t=2024-04-16T01%3A57%3A17.568Z",
+        tipo: "Informe Trimestral",
+        inversion: "Folsom",
+      },
+      {
+        nombre: "Diciembre 2022",
+        link: "https://bykoetjilbiepykdxnir.supabase.co/storage/v1/object/public/Documentos/Folsom/Informes/Trimestral/1844%20FOLSOM%20REPORTE%20TRIMESTRAL%20DICIEMBRE%202022%20.pdf?t=2024-04-16T01%3A57%3A31.311Z",
+        tipo: "Informe Trimestral",
+        inversion: "Folsom",
+      },
+      {
+        nombre: "Marzo 2022",
+        link: "https://bykoetjilbiepykdxnir.supabase.co/storage/v1/object/public/Documentos/Folsom/Informes/Trimestral/1844%20FOLSOM%20REPORTE%20TRIMESTRAL%20MARZO%202022.pdf?t=2024-04-16T01%3A57%3A38.613Z",
+        tipo: "Informe Trimestral",
+        inversion: "Folsom",
+      }
+    );
+  }
+
+  return documentosFormateados;
+}
+export default async function DocumentosPage() {
+  const supabase = createClient();
+
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+
+  if (!user) {
+    return redirect("/login");
+  }
+
+  const { data, error } = await supabase
+    .from("VistaDocumentosFinal")
+    .select("*")
+    .eq("UserId", user?.id);
+
+  const documentosFormateados = formatDocumentos(data);
 
   return (
-    <div className="container mx-auto px-4 py-8">
-      <h2 className="text-2xl font-semibold mb-4">Listado de Documentos</h2>
-
-      {/* Selector de tipos de documentos ajustado para usar onValueChange */}
-      <div className="mb-4 flex gap-4">
-        <Select
-          value={filtroActivo}
-          onValueChange={setFiltroActivo} // Ajuste aquí
-          placeholder="Seleccione un tipo"
-          className="bg-white w-24"
-        >
-          {tipos.map((tipo) => (
-            <SelectItem key={tipo} value={tipo}>
-              {tipo}
-            </SelectItem>
-          ))}
-        </Select>
-
-        <Button
-          variant="secondary"
-          onClick={() => filtrarPorInversion("Folsom")}
-        >
-          Folsom
-        </Button>
-        <Button
-          variant="secondary"
-          onClick={() => filtrarPorInversion("30 th Street")}
-        >
-          30 th Street
-        </Button>
-        <Button variant="secondary" onClick={() => setFiltroActivo("Todos")}>
-          Todos
-        </Button>
-      </div>
-
-      <div className="overflow-x-auto">
-        <table className="table-auto w-full">
-          <thead>
+    <>
+      <Navbar />
+      <div className="container mx-auto px-4 py-8">
+        <h2 className="text-2xl font-semibold mb-4">Listado de Documentos</h2>
+        <table className="min-w-full divide-y divide-gray-200">
+          <thead className="bg-gray-50">
             <tr>
-              <th className="px-4 py-2 text-left">Nombre</th>
-              <th className="px-4 py-2 text-left">Tipo</th>
-              <th className="px-4 py-2 text-left">Inversión</th>
-              <th className="px-4 py-2 text-left">Fecha</th>
-              <th className="px-4 py-2"></th>
-              {/* Añadido encabezado para botones */}
+              <th
+                scope="col"
+                className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+              >
+                Nombre del Documento
+              </th>
+              <th
+                scope="col"
+                className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+              >
+                Tipo
+              </th>
+              <th
+                scope="col"
+                className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+              >
+                Inversión
+              </th>
+              <th
+                scope="col"
+                className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+              >
+                Enlace
+              </th>
             </tr>
           </thead>
-          <tbody>
-            {filtrarDocumentos().map((documento, index) => (
-              <tr
-                key={index}
-                className={`${index % 2 === 0 ? "bg-gray-100" : "bg-white"}`}
-              >
-                <td className="border px-4 py-2">{documento.nombre}</td>
-                <td className="border px-4 py-2">{documento.tipo}</td>
-                <td className="border px-4 py-2">{documento.inversion}</td>
-                <td className="border px-4 py-2">{documento.fecha}</td>
-                <td className="border px-4 py-2 flex justify-center">
-                  <button
-                    className="px-4 py-2 rounded hover:bg-blue-500 transition duration-150 ease-in-out underline"
-                    onClick={() => setDocumentoActivo(documento)}
-                  >
-                    Ver Pdf
-                  </button>
-                </td>
-              </tr>
-            ))}
+          <tbody className="bg-white divide-y divide-gray-200">
+            {documentosFormateados.map((documento, index) =>
+              documento.link !== null ? (
+                <tr
+                  key={index}
+                  className={`${index % 2 === 0 ? "bg-gray-100" : "bg-white"}`}
+                >
+                  <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                    {documento.nombre}
+                  </td>
+                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                    {documento.tipo}
+                  </td>
+                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                    {documento.inversion}
+                  </td>
+                  <td className="px-6 py-4 whitespace-nowrap text-sm text-blue-500 hover:text-blue-800">
+                    <a
+                      href={documento.link}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      Ver documento
+                    </a>
+                  </td>
+                </tr>
+              ) : null
+            )}
           </tbody>
         </table>
       </div>
-      {documentoActivo && (
-        <Dialog
-          open={!!documentoActivo}
-          onClose={() => setDocumentoActivo(null)}
-          static={true}
-        >
-          <DialogPanel>
-            <iframe
-              src={documentoActivo.link}
-              width="100%"
-              height="700px"
-              style={{ border: "none" }}
-              allowFullScreen
-              className="rounded-md"
-            ></iframe>
-            <Button
-              className="mt-8 w-full"
-              onClick={() => setDocumentoActivo(null)}
-            >
-              Cerrar
-            </Button>
-          </DialogPanel>
-        </Dialog>
-      )}
-    </div>
+    </>
   );
 }

@@ -20,7 +20,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={inter.className}>
         <ThemeProvider attribute="class" disableTransitionOnChange>
-          <Navbar />
+          {/* <Navbar /> */}
           <div>{children}</div>
         </ThemeProvider>
       </body>
