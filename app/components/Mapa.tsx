@@ -99,7 +99,7 @@ export default function Mapa({ data }) {
             <Button
               variant={selectedProject === "Folsom" ? "primary" : "secondary"}
               onClick={() =>
-                moveToLocation(locations[1].lat, locations[1].lng, "Folsom")
+                moveToLocation(locations[0].lat, locations[0].lng, "Folsom")
               }
             >
               Folsom

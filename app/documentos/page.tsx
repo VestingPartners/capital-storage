@@ -2,6 +2,7 @@ import { Button, Select, SelectItem } from "@tremor/react";
 import { createClient } from "@/lib/supabase/server";
 import Navbar from "../components/Navbar";
 import { redirect } from "next/navigation";
+import Link from "next/link";
 
 function formatDocumentos(data: any) {
   const documentosFormateados = [
@@ -204,7 +205,7 @@ function formatDocumentos(data: any) {
 export default async function DocumentosPage({
   searchParams,
 }: {
-  searchParams: { inversionista: string };
+  searchParams: { inversionista: string; tipo: string };
 }) {
   const supabase = createClient();
 
@@ -219,7 +220,7 @@ export default async function DocumentosPage({
   let data;
   let error;
 
-  if (searchParams.inversionista) {
+  if (searchParams.inversionista !== "undefined") {
     ({ data, error } = await supabase
       .from("VistaDocumentosFinal")
       .select("*")
@@ -232,45 +233,64 @@ export default async function DocumentosPage({
       .eq("UserId", user?.id));
   }
 
-  const documentosFormateados = formatDocumentos(data);
+  const documentosFormateados = data ? formatDocumentos(data) : [];
+
+  const tiposDeDocumento = Array.from(
+    new Set(documentosFormateados.map((doc) => doc.tipo))
+  );
+
+  const filtrarDocumentos = (tipo: string) => {
+    if (tipo === "Todos") {
+      return documentosFormateados;
+    } else {
+      return documentosFormateados.filter((doc) => doc.tipo === tipo);
+    }
+  };
+
+  const documentosFiltrados = searchParams.tipo
+    ? filtrarDocumentos(searchParams.tipo)
+    : documentosFormateados;
 
   return (
     <>
       <Navbar />
       <div className="container mx-auto px-4 py-8">
         <h2 className="text-2xl font-semibold mb-4">Listado de Documentos</h2>
+        <div className="mb-4">
+          <span className="mr-2">Filtrar por tipo:</span>
+          <Link
+            href={`/documentos?inversionista=${searchParams.inversionista}`}
+          >
+            <Button
+              variant={
+                searchParams.tipo === undefined ? "primary" : "secondary"
+              }
+              size="xs"
+              className="mr-2"
+            >
+              Todos
+            </Button>
+          </Link>
+          {tiposDeDocumento.map((tipo) => (
+            <Link
+              href={`/documentos?inversionista=${searchParams.inversionista}&tipo=${tipo}`}
+            >
+              <Button
+                key={tipo}
+                variant={searchParams.tipo === tipo ? "primary" : "secondary"}
+                size="xs"
+                className="mr-2"
+              >
+                {tipo}
+              </Button>
+            </Link>
+          ))}
+        </div>
         <table className="min-w-full divide-y divide-gray-200">
-          <thead className="bg-gray-50">
-            <tr>
-              <th
-                scope="col"
-                className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
-              >
-                Nombre del Documento
-              </th>
-              <th
-                scope="col"
-                className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
-              >
-                Tipo
-              </th>
-              <th
-                scope="col"
-                className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
-              >
-                Inversión
-              </th>
-              <th
-                scope="col"
-                className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
-              >
-                Enlace
-              </th>
-            </tr>
-          </thead>
+          {/* ... */}
           <tbody className="bg-white divide-y divide-gray-200">
-            {documentosFormateados.map((documento, index) =>
-              documento.link !== null ? (
+            {documentosFiltrados.map((documento, index) =>
+              documento.link ? (
                 <tr
                   key={index}
                   className={`${index % 2 === 0 ? "bg-gray-100" : "bg-white"}`}
