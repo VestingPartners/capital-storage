@@ -40,14 +40,17 @@ export default function Login({
   };
 
   return (
-    <main className="h-dvh flex flex-col items-center justify-center overflow-auto">
-      <Image
-        src="/LogoCapitalStorage_Fondo Azul (1).png"
-        width={300}
-        height={300}
-        alt=""
-        className="mb-4 w-auto h-auto max-w-full max-h-24" // Ajusta los tamaños aquí
-      />
+    <main className="flex flex-col items-center justify-center min-h-screen">
+      {/* Considera envolver la imagen en un div si necesitas más control */}
+      <div className="w-full flex justify-center px-4">
+        <Image
+          src="/LogoCapitalStorage_Fondo Azul (1).png"
+          width={300}
+          height={300} // Asegúrate de que estos valores mantienen la relación de aspecto de la imagen original
+          alt="Logo de Capital Storage"
+          className="mx-auto my-4 max-w-xs sm:max-w-sm md:max-w-md" // Ajusta las clases de tamaño máximo para diferentes pantallas
+        />
+      </div>
       <div className="flex flex-col w-full px-4 py-8 sm:p-12 sm:max-w-md justify-center gap-2 bg-white shadow-lg rounded-lg">
         <form className="flex flex-col w-full justify-center gap-2">
           <h2 className="text-[16px] text-gray-600  text-center mb-4">
