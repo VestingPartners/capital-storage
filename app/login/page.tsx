@@ -40,7 +40,7 @@ export default function Login({
   };
 
   return (
-    <main className="h-screen flex flex-col items-center justify-center">
+    <main className="h-dvh flex flex-col items-center justify-center overflow-auto">
       <Image
         src="/LogoCapitalStorage_Fondo Azul (1).png"
         width={300}
