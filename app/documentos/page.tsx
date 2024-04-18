@@ -220,7 +220,10 @@ export default async function DocumentosPage({
   let data;
   let error;
 
-  if (searchParams.inversionista !== "undefined") {
+  if (
+    searchParams.inversionista !== "undefined" &&
+    searchParams.inversionista
+  ) {
     ({ data, error } = await supabase
       .from("VistaDocumentosFinal")
       .select("*")

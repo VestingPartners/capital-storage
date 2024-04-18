@@ -24,7 +24,10 @@ export default async function Home({
   let data;
   let error;
 
-  if (searchParams.inversionista) {
+  if (
+    searchParams.inversionista !== "undefined" &&
+    searchParams.inversionista
+  ) {
     ({ data, error } = await supabase
       .from("VistaAportantesFinal")
       .select("*")
@@ -44,7 +47,7 @@ export default async function Home({
 
   return (
     <>
-      {searchParams.inversionista && (
+      {searchParams.inversionista !== "undefined" && (
         <Link
           href="/select"
           className="absolute left-4 sm:left-8 top-16 py-2 px-4 rounded-md no-underline text-foreground bg-btn-background hover:bg-btn-background-hover flex items-center group text-sm"
