@@ -47,7 +47,7 @@ export default async function Home({
       {searchParams.inversionista && (
         <Link
           href="/select"
-          className="absolute left-8 top-16 py-2 px-4 rounded-md no-underline text-foreground bg-btn-background hover:bg-btn-background-hover flex items-center group text-sm"
+          className="absolute left-4 sm:left-8 top-16 py-2 px-4 rounded-md no-underline text-foreground bg-btn-background hover:bg-btn-background-hover flex items-center group text-sm"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -66,10 +66,9 @@ export default async function Home({
           Atras
         </Link>
       )}
-
       <Navbar />
-      <div className="px-2 md:px-36">
-        <div className="mt-12 flex justify-center gap-x-12">
+      <div className="px-4 sm:px-8 md:px-16 lg:px-24 xl:px-36">
+        <div className="mt-12 flex flex-col md:flex-row justify-center gap-6 md:gap-12">
           <div className="flex flex-col gap-6">
             {data && <Info data={data} />}
             {data && <Card data={data} />}

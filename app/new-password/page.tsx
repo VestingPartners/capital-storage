@@ -4,26 +4,48 @@ import Image from "next/image";
 import { createClient } from "@/lib/supabase/server";
 import { redirect } from "next/navigation";
 
-export default function ForgotPassword({
+export default function NewPassword({
   searchParams,
 }: {
   searchParams: { message: string };
 }) {
-  const reset = async (formData: FormData) => {
+  const signIn = async (formData: FormData) => {
     "use server";
 
     const email = formData.get("email") as string;
+    const password = formData.get("password") as string;
+
+    if (password.length < 6) {
+      return redirect(
+        "/new-password?message=La contraseña debe tener al menos 6 caracteres"
+      );
+    }
     const supabase = createClient();
+    await supabase.auth.updateUser({
+      email: email,
+      password: password,
+    });
 
-    let { data, error } = await supabase.auth.resetPasswordForEmail(email);
+    const { data, error } = await supabase.auth.signInWithPassword({
+      email,
+      password,
+    });
 
-    if (error) {
-      console.log(error);
+    const { data: data2 } = await supabase
+      .from("VistaAportantesFinal")
+      .select("*")
+      .eq("UserId", data.user?.id);
+
+    // @ts-ignore
+    if (data2.length > 1) {
+      return redirect("/select");
     }
 
-    return redirect(
-      "/forgot-password?message=Se le ha enviado un correo, revisar spam."
-    );
+    if (error) {
+      return redirect("/login?message=Error al iniciar sesion");
+    }
+
+    return redirect("/");
   };
   return (
     <main className="h-screen flex flex-col items-center justify-center">
@@ -50,9 +72,20 @@ export default function ForgotPassword({
             placeholder="correo@ejemplo.com"
             required
           />
+          <label className="text-md" htmlFor="password">
+            Nueva Contraseña
+          </label>
+          <input
+            className="rounded-md px-4 py-2 bg-inherit border mb-6"
+            type="password"
+            name="password"
+            placeholder="••••••••"
+            minLength={6}
+            required
+          />
 
           <SubmitButton
-            formAction={reset}
+            formAction={signIn}
             className="bg-[#415792] rounded-md px-4 py-2 text-foreground mb-2 text-white"
             pendingText="Recuperando..."
           >
@@ -66,12 +99,12 @@ export default function ForgotPassword({
             Iniciar sesión
           </Link>
           {/* <SubmitButton
-        formAction={signUp}
-        className="border border-foreground/20 rounded-md px-4 py-2 text-foreground mb-2"
-        pendingText="Signing Up..."
-      >
-        Sign Up
-      </SubmitButton> */}
+    formAction={signUp}
+    className="border border-foreground/20 rounded-md px-4 py-2 text-foreground mb-2"
+    pendingText="Signing Up..."
+  >
+    Sign Up
+  </SubmitButton> */}
           {searchParams?.message && (
             <p className="mt-4 p-4 bg-foreground/10 text-foreground text-center">
               {searchParams.message}
