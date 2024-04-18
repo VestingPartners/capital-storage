@@ -201,7 +201,11 @@ function formatDocumentos(data: any) {
 
   return documentosFormateados;
 }
-export default async function DocumentosPage() {
+export default async function DocumentosPage({
+  searchParams,
+}: {
+  searchParams: { inversionista: string };
+}) {
   const supabase = createClient();
 
   const {
@@ -212,10 +216,21 @@ export default async function DocumentosPage() {
     return redirect("/login");
   }
 
-  const { data, error } = await supabase
-    .from("VistaDocumentosFinal")
-    .select("*")
-    .eq("UserId", user?.id);
+  let data;
+  let error;
+
+  if (searchParams.inversionista) {
+    ({ data, error } = await supabase
+      .from("VistaDocumentosFinal")
+      .select("*")
+      .eq("UserId", user?.id)
+      .eq("Inversionista", searchParams.inversionista));
+  } else {
+    ({ data, error } = await supabase
+      .from("VistaDocumentosFinal")
+      .select("*")
+      .eq("UserId", user?.id));
+  }
 
   const documentosFormateados = formatDocumentos(data);
 

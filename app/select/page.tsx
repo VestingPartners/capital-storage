@@ -19,14 +19,6 @@ export default async function SelectPage() {
     .select("*")
     .eq("UserId", user?.id);
 
-  console.log(data);
-
-  //   const handleInversionistaClick = (inversionista) => {
-  //     // Lógica para redirigir a la página correspondiente según el inversionista seleccionado
-  //     // Puedes usar el objeto `router` de Next.js para realizar la redirección
-  //     // Ejemplo: router.push(`/inversionista/${inversionista}`);
-  //   };
-
   return (
     <div>
       <Navbar />
@@ -45,12 +37,6 @@ export default async function SelectPage() {
               <p className="text-gray-600 mb-4">
                 Total Inversiones: ${item["Total Inversiones"]}
               </p>
-              {/* <button
-                  // onClick={() => handleInversionistaClick(item.Inversionista)}
-                  className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600"
-                >
-                  Ver Detalles
-                </button> */}
             </Link>
           ))}
         </div>
