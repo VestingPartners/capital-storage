@@ -271,8 +271,9 @@ export default async function DocumentosPage({
               Todos
             </Button>
           </Link>
-          {tiposDeDocumento.map((tipo) => (
+          {tiposDeDocumento.map((tipo, index) => (
             <Link
+              key={index}
               href={`/documentos?inversionista=${searchParams.inversionista}&tipo=${tipo}`}
             >
               <Button
