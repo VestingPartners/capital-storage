@@ -44,12 +44,12 @@ export default function Login({
       <Image
         src="/LogoCapitalStorage_Fondo Azul (1).png"
         width={300}
-        height={500}
+        height={300}
         alt=""
-        className="mb-4"
+        className="mb-4 w-auto h-auto max-w-full max-h-24" // Ajusta los tamaños aquí
       />
-      <div className="flex flex-col w-full p-12 sm:max-w-md justify-center gap-2 bg-white shadow-lg rounded-lg">
-        <form className="animate-in flex-1 flex flex-col w-full justify-center gap-2 text-foreground">
+      <div className="flex flex-col w-full px-4 py-8 sm:p-12 sm:max-w-md justify-center gap-2 bg-white shadow-lg rounded-lg">
+        <form className="flex flex-col w-full justify-center gap-2">
           <h2 className="text-[16px] text-gray-600  text-center mb-4">
             Sign in with
             <span className="text-[#415792] font-semibold ml-1">
