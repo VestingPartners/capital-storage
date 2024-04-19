@@ -133,7 +133,7 @@ export default function Mapa({ data }) {
           {selectedProject === "30th Street" && (
             <div className="w-full sm:flex">
               <Image
-                src="/30 street.jpg"
+                src="/Proyecto.jpg"
                 width={1200} // Aumentar el ancho de la imagen
                 height={800} // Aumentar la altura de la imagen
                 alt="30th Street"
