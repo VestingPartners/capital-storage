@@ -32,7 +32,7 @@ export default function Informe({ data }: any) {
 
   const mostrarDonutChart = inversiones2.length > 1;
   return (
-    <div className="card w-[480px] h-fit rounded-md p-5 shadow-sm border border-black/5 bg-white flex flex-col">
+    <div className="card w-full h-fit rounded-md p-5 shadow-sm border border-black/5 bg-white flex flex-col">
       <p className="text-xl font-bold w-full text-center">
         {data[0].Inversionista}
       </p>

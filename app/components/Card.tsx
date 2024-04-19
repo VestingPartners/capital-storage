@@ -64,32 +64,30 @@ export default function Card({ data }) {
   }
 
   return (
-    <div className="card w-full rounded-md p-5 shadow-sm border border-black/5 bg-white">
-      <div className="">
-        <p className="text-xl font-semibold w-full text-center">Aportes</p>
-        <Table>
-          <TableHead>
-            <TableRow>
-              <TableHeaderCell>Proyecto</TableHeaderCell>
-              <TableHeaderCell>Fecha</TableHeaderCell>
-              <TableHeaderCell>Monto</TableHeaderCell>
-              <TableHeaderCell>Dividendos</TableHeaderCell>
+    <div className="card w-full text-xs rounded-md shadow-sm border border-black/5 bg-white">
+      <p className="text-xl font-semibold w-full text-center">Aportes</p>
+      <Table>
+        <TableHead>
+          <TableRow>
+            <TableHeaderCell>Proyecto</TableHeaderCell>
+            <TableHeaderCell>Fecha</TableHeaderCell>
+            <TableHeaderCell>Monto</TableHeaderCell>
+            <TableHeaderCell>Dividendos</TableHeaderCell>
+          </TableRow>
+        </TableHead>
+        <TableBody>
+          {aportes.map((aporte, index) => (
+            <TableRow key={index}>
+              <TableCell>{aporte.proyecto}</TableCell>
+              <TableCell>{formatDate(aporte.fecha)}</TableCell>
+              <TableCell>USD {formatCurrency(aporte.monto)}</TableCell>
+              <TableCell className=" text-center">
+                {aporte.dividendos}
+              </TableCell>
             </TableRow>
-          </TableHead>
-          <TableBody>
-            {aportes.map((aporte, index) => (
-              <TableRow key={index}>
-                <TableCell>{aporte.proyecto}</TableCell>
-                <TableCell>{formatDate(aporte.fecha)}</TableCell>
-                <TableCell>USD {formatCurrency(aporte.monto)}</TableCell>
-                <TableCell className=" text-center">
-                  {aporte.dividendos}
-                </TableCell>
-              </TableRow>
-            ))}
-          </TableBody>
-        </Table>
-      </div>
+          ))}
+        </TableBody>
+      </Table>
     </div>
   );
 }

@@ -47,36 +47,39 @@ export default async function Home({
 
   return (
     <>
-      {searchParams.inversionista !== "undefined" && (
-        <Link
-          href="/select"
-          className="absolute left-4 sm:left-8 top-16 py-2 px-4 rounded-md no-underline text-foreground bg-btn-background hover:bg-btn-background-hover flex items-center group text-sm"
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="24"
-            height="24"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            className="mr-2 h-4 w-4 transition-transform group-hover:-translate-x-1"
+      <div className="">
+        {searchParams.inversionista !== "undefined" && (
+          <Link
+            href="/select"
+            className="hidden absolute left-4 sm:left-8 top-16 py-2 px-4 rounded-md no-underline text-foreground bg-btn-background hover:bg-btn-background-hover flex items-center group text-sm"
           >
-            <polyline points="15 18 9 12 15 6" />
-          </svg>{" "}
-          Atras
-        </Link>
-      )}
-      <Navbar />
-      <div className="px-4 sm:px-8 md:px-16 lg:px-24 xl:px-36">
-        <div className="mt-12 flex flex-col md:flex-row justify-center gap-6 md:gap-12">
-          <div className="flex flex-col gap-6">
-            {data && <Info data={data} />}
-            {data && <Card data={data} />}
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              className="mr-2 h-4 w-4 transition-transform group-hover:-translate-x-1"
+            >
+              <polyline points="15 18 9 12 15 6" />
+            </svg>{" "}
+            Atras
+          </Link>
+        )}
+        <Navbar />
+
+        <div className="flex flex-col p-2 gap-2 lg:p-6 2xl:px-48">
+          <div className="lg:flex lg:gap-6">
+            <div className="lg:w-4/10 lg:flex lg:flex-col lg:gap-6">
+              {data && <Info data={data} />}
+              {data && <Card data={data} />}
+            </div>
+            <div className="lg:w-full">{data && <Mapa data={data} />}</div>
           </div>
-          {data && <Mapa data={data} />}
         </div>
       </div>
     </>

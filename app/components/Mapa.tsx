@@ -5,7 +5,6 @@
 import React, { useState } from "react";
 import { GoogleMap, useJsApiLoader, Marker } from "@react-google-maps/api";
 import { Button } from "@tremor/react";
-import { RiSearch2Line } from "@remixicon/react";
 import Image from "next/image";
 
 const containerStyle = {
@@ -14,8 +13,8 @@ const containerStyle = {
 };
 
 const center = {
-  lat: 40.022961, // Promedio aproximado de las latitudes de las ubicaciones
-  lng: -105.258313, // Promedio aproximado de las longitudes de las ubicaciones
+  lat: 40.022961,
+  lng: -105.258313,
 };
 
 const locations = [
@@ -24,25 +23,6 @@ const locations = [
 ];
 
 export default function Mapa({ data }) {
-  const projectDetails = {
-    Folsom: {
-      image: "/Folsom Street.jpg",
-      width: 320,
-      height: 500,
-      units: "227",
-      equity: "USD $10.200.000",
-      delivery: "Marzo 2028",
-    },
-    "30th Street": {
-      image: "/30 street.jpg",
-      width: 420,
-      height: 440,
-      units: "143",
-      equity: "USD $3.500.000",
-      delivery: "Noviembre 2027",
-    },
-  };
-
   const defaultProject =
     data[0]["Total Invertido Folsom"] > 0 ? "Folsom" : "30th Street";
   const [selectedProject, setSelectedProject] = useState(defaultProject);
@@ -94,8 +74,8 @@ export default function Mapa({ data }) {
       </div>
 
       <div className="w-full bg-white shadow-sm border border-black/5 rounded-lg p-4">
-        <div className="flex gap-4 items-center mb-4">
-          {data[0]["Total Invertido Folsom"] != null && (
+        <div className="flex justify-between items-center  mb-4">
+          {data[0]["Total Invertido Folsom"] != 0 && (
             <Button
               variant={selectedProject === "Folsom" ? "primary" : "secondary"}
               onClick={() =>
@@ -106,7 +86,7 @@ export default function Mapa({ data }) {
             </Button>
           )}
 
-          {data[0]["Total Invertido 30 Street"] != null && (
+          {data[0]["Total Invertido 30 Street"] != 0 && (
             <Button
               variant={
                 selectedProject === "30th Street" ? "primary" : "secondary"
@@ -126,13 +106,13 @@ export default function Mapa({ data }) {
 
         <div className="flex gap-8">
           {selectedProject === "Folsom" && (
-            <div className="flex">
+            <div className="w-full sm:flex">
               <Image
                 src="/Folsom Street.jpg"
-                width={300} // Ajustar según sea necesario
-                height={200} // Ajustar según sea necesario
-                alt="Folsom Street"
-                className="rounded-lg"
+                width={1200} // Aumentar el ancho de la imagen
+                height={800} // Aumentar la altura de la imagen
+                alt="30th Street"
+                className="rounded-lg  w-full lg:w-56 h-56"
               />
               <div className="flex flex-col justify-start items-start py-2 px-6">
                 <h2 className="text-2xl font-semibold mb-4">
@@ -158,14 +138,15 @@ export default function Mapa({ data }) {
           )}
 
           {selectedProject === "30th Street" && (
-            <div className="flex">
+            <div className="w-full sm:flex">
               <Image
                 src="/30 street.jpg"
-                width={300} // Ajustar según sea necesario
-                height={200} // Ajustar según sea necesario
+                width={1200} // Aumentar el ancho de la imagen
+                height={800} // Aumentar la altura de la imagen
                 alt="30th Street"
-                className="rounded-lg"
+                className="rounded-lg w-full lg:w-56 h-56" // Agregar clases para ajustar el tamaño
               />
+
               <div className="flex flex-col justify-start items-start py-2 px-6">
                 <h2 className="text-2xl font-semibold mb-4">
                   Snapshot Fondo 30th Street

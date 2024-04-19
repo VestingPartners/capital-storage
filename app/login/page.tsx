@@ -53,7 +53,7 @@ export default function Login({
       </div>
       <div className="flex flex-col w-full px-4 py-8 sm:p-12 sm:max-w-md justify-center gap-2 bg-white shadow-lg rounded-lg">
         <form className="flex flex-col w-full justify-center gap-2">
-          <h2 className="text-[16px] text-gray-600  text-center mb-4">
+          <h2 className="text-[16px] text-gray-600  text-center ">
             Sign in with
             <span className="text-[#415792] font-semibold ml-1">
               Capstor Software
@@ -63,7 +63,7 @@ export default function Login({
             Email
           </label>
           <input
-            className="rounded-md px-4 py-2 bg-inherit border mb-6"
+            className="rounded-md px-4 py-2 bg-inherit border "
             name="email"
             placeholder="correo@ejemplo.com"
             required
@@ -72,7 +72,7 @@ export default function Login({
             Contraseña
           </label>
           <input
-            className="rounded-md px-4 py-2 bg-inherit border mb-6"
+            className="rounded-md px-4 py-2 bg-inherit border mb-2"
             type="password"
             name="password"
             placeholder="••••••••"
