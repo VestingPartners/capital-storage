@@ -38,7 +38,7 @@ function formatDocumentos(data: any) {
     },
     {
       nombre: "Term Sheet 30th Street",
-      link: data[0]["Term Sheet"],
+      link: "https://bykoetjilbiepykdxnir.supabase.co/storage/v1/object/public/Documentos/30%20Street/Term%20Sheet/Copia%20de%20CS%20FUND%20IV%20-%2030%20_%20BLUFF%20REDEVELOPMENT%20%20V1.1.pptx.pdf?t=2024-04-19T15%3A41%3A58.046Z",
       tipo: "Term Sheet",
       inversion: "30th Street",
     },
