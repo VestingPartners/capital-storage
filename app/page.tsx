@@ -51,7 +51,7 @@ export default async function Home({
         {searchParams.inversionista !== "undefined" && (
           <Link
             href="/select"
-            className="hidden absolute left-4 sm:left-8 top-16 py-2 px-4 rounded-md no-underline text-foreground bg-btn-background hover:bg-btn-background-hover flex items-center group text-sm"
+            className=" hidden lg:absolute lg:left-4 sm:left-8 lg:top-[60px] lg:py-2 lg:px-4 lg:rounded-md lg:no-underline lg:text-foreground lg:bg-btn-background lg:hover:bg-btn-background-hover lg:flex lg:items-center lg:group lg:text-sm"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"

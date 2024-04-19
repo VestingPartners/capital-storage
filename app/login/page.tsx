@@ -90,7 +90,7 @@ export default function Login({
             href={"/forgot-password"}
             className="text-blue-600 hover:text-blue-800 w-full max-w-md text-center text-sm"
           >
-            ¿Olvidaste tu contraseña?
+            Cambia tu contraseña
           </Link>
           {/* <SubmitButton
             formAction={signUp}
@@ -112,10 +112,10 @@ export default function Login({
         potenciales inversionistas. Para más información o para solicitar
         acceso, por favor contacte a{" "}
         <Link
-          href="mailto:Capstor@capitalstorage.cl"
+          href="mailto:contacto@capitalstorage.cl"
           className="text-blue-600 hover:text-blue-800"
         >
-          capstor@capitalstorage.cl
+          contacto@capitalstorage.cl
         </Link>
       </p>
       <div className="mt-24"></div>
