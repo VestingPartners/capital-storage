@@ -36,24 +36,6 @@ function formatDocumentos(data: any) {
       tipo: "Legal",
       inversion: "Folsom",
     },
-    {
-      nombre: "Term Sheet 30th Street",
-      link: "https://bykoetjilbiepykdxnir.supabase.co/storage/v1/object/public/Documentos/30%20Street/Term%20Sheet/Copia%20de%20CS%20FUND%20IV%20-%2030%20_%20BLUFF%20REDEVELOPMENT%20%20V1.1.pptx.pdf?t=2024-04-19T15%3A41%3A58.046Z",
-      tipo: "Term Sheet",
-      inversion: "30th Street",
-    },
-    {
-      nombre: "Term Sheet 1",
-      link: "https://bykoetjilbiepykdxnir.supabase.co/storage/v1/object/public/Documentos/Folsom/Documento%20Proyecto/CAPITAL%20STORAGE%20FUND%20III%20-%20FOLSOM%20VF.pdf?t=2024-04-16T01%3A28%3A24.295Z",
-      tipo: "Term Sheet",
-      inversion: "Folsom",
-    },
-    {
-      nombre: "Term Sheet 2",
-      link: "https://bykoetjilbiepykdxnir.supabase.co/storage/v1/object/public/Documentos/Folsom/Documento%20Proyecto/CS%20Term%20Sheet%20Folsom%20House.pdf?t=2024-04-16T01%3A28%3A52.919Z",
-      tipo: "Term Sheet",
-      inversion: "Folsom",
-    },
   ];
 
   if (data[0]["Documentos Proyecto Folsom"]) {
@@ -68,6 +50,18 @@ function formatDocumentos(data: any) {
         nombre: "Reporte 2",
         link: "https://bykoetjilbiepykdxnir.supabase.co/storage/v1/object/public/Documentos/Folsom/Documento%20Proyecto/CS%20Term%20Sheet%20Folsom%20House.pdf?t=2024-04-16T01%3A28%3A52.919Z",
         tipo: "Proyecto",
+        inversion: "Folsom",
+      },
+      {
+        nombre: "Term Sheet 1",
+        link: "https://bykoetjilbiepykdxnir.supabase.co/storage/v1/object/public/Documentos/Folsom/Documento%20Proyecto/CAPITAL%20STORAGE%20FUND%20III%20-%20FOLSOM%20VF.pdf?t=2024-04-16T01%3A28%3A24.295Z",
+        tipo: "Term Sheet",
+        inversion: "Folsom",
+      },
+      {
+        nombre: "Term Sheet 2",
+        link: "https://bykoetjilbiepykdxnir.supabase.co/storage/v1/object/public/Documentos/Folsom/Documento%20Proyecto/CS%20Term%20Sheet%20Folsom%20House.pdf?t=2024-04-16T01%3A28%3A52.919Z",
+        tipo: "Term Sheet",
         inversion: "Folsom",
       }
     );
@@ -121,6 +115,12 @@ function formatDocumentos(data: any) {
         nombre: "Informe trimestral Diciembre 2022",
         link: "https://bykoetjilbiepykdxnir.supabase.co/storage/v1/object/public/Documentos/30%20Street/Informes/Trimestral/30th%20Street%20-%20Diciembre%202022.pdf?t=2024-04-15T16%3A52%3A16.294Z",
         tipo: "Informe",
+        inversion: "30th Street",
+      },
+      {
+        nombre: "Term Sheet 30th Street",
+        link: "https://bykoetjilbiepykdxnir.supabase.co/storage/v1/object/public/Documentos/30%20Street/Term%20Sheet/Copia%20de%20CS%20FUND%20IV%20-%2030%20_%20BLUFF%20REDEVELOPMENT%20%20V1.1.pptx.pdf?t=2024-04-19T15%3A41%3A58.046Z",
+        tipo: "Term Sheet",
         inversion: "30th Street",
       }
     );
