@@ -1,5 +1,7 @@
 // @ts-nocheck
 
+"use client";
+
 import {
   Table,
   TableBody,
@@ -65,7 +67,46 @@ export default function Card({ data }) {
 
   return (
     <div className="card w-full text-xs rounded-md shadow-sm border border-black/5 bg-white">
-      <p className="text-xl font-semibold w-full text-center">Aportes</p>
+      <p className="text-xl font-semibold w-full text-center relative">
+        Aportes
+        {data[0]["Monto 1 Aporte Folsom"] !== null && (
+          <>
+            <span
+              className="text-xs text-gray-500 cursor-pointer"
+              onMouseEnter={(e) =>
+                e.currentTarget.setAttribute(
+                  "data-title",
+                  "Aportes realizados en folsom 2021, se encuentran valorizados a diciembre 2023."
+                )
+              }
+              onMouseLeave={(e) =>
+                e.currentTarget.removeAttribute("data-title")
+              }
+            >
+              *
+            </span>
+            <style jsx>{`
+              span {
+                vertical-align: super;
+              }
+              span:hover::after {
+                content: attr(data-title);
+                position: absolute;
+                top: 100%;
+                left: 50%;
+                transform: translateX(-50%);
+                background-color: #000;
+                color: #fff;
+                padding: 4px 8px;
+                border-radius: 4px;
+                font-size: 12px;
+                white-space: nowrap;
+                z-index: 1;
+              }
+            `}</style>
+          </>
+        )}
+      </p>
       <Table>
         <TableHead>
           <TableRow>
