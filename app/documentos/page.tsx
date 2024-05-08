@@ -70,6 +70,30 @@ function formatDocumentos(data: any) {
   if (data[0]["Informes Mensuales 30 Street"]) {
     documentosFormateados.push(
       {
+        nombre: "Update Marzo 2024",
+        link: "https://bykoetjilbiepykdxnir.supabase.co/storage/v1/object/public/Documentos/30%20Street/Informes/Mensual/Update%20mensual%20_%20Marzo%202024%20.pdf?t=2024-04-15T16%3A49%3A08.941Z",
+        tipo: "Informe",
+        inversion: "30th Street",
+      },
+      {
+        nombre: "Update Enero 2024",
+        link: "https://bykoetjilbiepykdxnir.supabase.co/storage/v1/object/public/Documentos/30%20Street/Informes/Mensual/Update%20Mensual%20Noviembre%202022.pdf?t=2024-04-15T16%3A47%3A25.865Z",
+        tipo: "Informe",
+        inversion: "30th Street",
+      },
+      {
+        nombre: "Update Noviembre 2022",
+        link: "https://bykoetjilbiepykdxnir.supabase.co/storage/v1/object/public/Documentos/30%20Street/Informes/Mensual/Update%20Mensual%20Noviembre%202022.pdf?t=2024-04-15T16%3A47%3A25.865Z",
+        tipo: "Informe",
+        inversion: "30th Street",
+      },
+      {
+        nombre: "Update Julio 2022",
+        link: "https://bykoetjilbiepykdxnir.supabase.co/storage/v1/object/public/Documentos/30%20Street/Informes/Mensual/Update%20Mensual_%20Julio%202022.pdf?t=2024-04-15T16%3A46%3A47.667Z",
+        tipo: "Informe",
+        inversion: "30th Street",
+      },
+      {
         nombre: "Update Mayo 2022",
         link: "https://bykoetjilbiepykdxnir.supabase.co/storage/v1/object/public/Documentos/30%20Street/Informes/Mensual/Update%20Mensual%20Mayo%202022.pdf?t=2024-04-15T16%3A42%3A26.922Z",
         tipo: "Informe",
@@ -82,38 +106,14 @@ function formatDocumentos(data: any) {
         inversion: "30th Street",
       },
       {
-        nombre: "Update Julio 2022",
-        link: "https://bykoetjilbiepykdxnir.supabase.co/storage/v1/object/public/Documentos/30%20Street/Informes/Mensual/Update%20Mensual_%20Julio%202022.pdf?t=2024-04-15T16%3A46%3A47.667Z",
-        tipo: "Informe",
-        inversion: "30th Street",
-      },
-      {
-        nombre: "Update Noviembre 2022",
-        link: "https://bykoetjilbiepykdxnir.supabase.co/storage/v1/object/public/Documentos/30%20Street/Informes/Mensual/Update%20Mensual%20Noviembre%202022.pdf?t=2024-04-15T16%3A47%3A25.865Z",
-        tipo: "Informe",
-        inversion: "30th Street",
-      },
-      {
-        nombre: "Update Enero 2024",
-        link: "https://bykoetjilbiepykdxnir.supabase.co/storage/v1/object/public/Documentos/30%20Street/Informes/Mensual/Update%20Mensual%20Noviembre%202022.pdf?t=2024-04-15T16%3A47%3A25.865Z",
-        tipo: "Informe",
-        inversion: "30th Street",
-      },
-      {
-        nombre: "Update Marzo 2024",
-        link: "https://bykoetjilbiepykdxnir.supabase.co/storage/v1/object/public/Documentos/30%20Street/Informes/Mensual/Update%20mensual%20_%20Marzo%202024%20.pdf?t=2024-04-15T16%3A49%3A08.941Z",
+        nombre: "Informe trimestral Diciembre 2022",
+        link: "https://bykoetjilbiepykdxnir.supabase.co/storage/v1/object/public/Documentos/30%20Street/Informes/Trimestral/30th%20Street%20-%20Diciembre%202022.pdf?t=2024-04-15T16%3A52%3A16.294Z",
         tipo: "Informe",
         inversion: "30th Street",
       },
       {
         nombre: "Informe trimestral Agosto 2022",
         link: "https://bykoetjilbiepykdxnir.supabase.co/storage/v1/object/public/Documentos/30%20Street/Informes/Trimestral/30th%20Street%20-%20Agosto%202022.pdf?t=2024-04-15T16%3A52%3A11.828Z",
-        tipo: "Informe",
-        inversion: "30th Street",
-      },
-      {
-        nombre: "Informe trimestral Diciembre 2022",
-        link: "https://bykoetjilbiepykdxnir.supabase.co/storage/v1/object/public/Documentos/30%20Street/Informes/Trimestral/30th%20Street%20-%20Diciembre%202022.pdf?t=2024-04-15T16%3A52%3A16.294Z",
         tipo: "Informe",
         inversion: "30th Street",
       },
@@ -141,14 +141,8 @@ function formatDocumentos(data: any) {
         inversion: "Folsom",
       },
       {
-        nombre: "Update Mayo 2022",
-        link: "https://bykoetjilbiepykdxnir.supabase.co/storage/v1/object/public/Documentos/Folsom/Informes/Mensual/Update%20Mensual%20Mayo%202022.pdf?t=2024-04-16T01%3A47%3A35.423Z",
-        tipo: "Informe",
-        inversion: "Folsom",
-      },
-      {
-        nombre: "Update Noviembre 2022",
-        link: "https://bykoetjilbiepykdxnir.supabase.co/storage/v1/object/public/Documentos/30%20Street/Informes/Mensual/Update%20Mensual%20Noviembre%202022.pdf?t=2024-04-15T16%3A47%3A25.865Z",
+        nombre: "Update Marzo 2024",
+        link: "https://bykoetjilbiepykdxnir.supabase.co/storage/v1/object/public/Documentos/Folsom/Informes/Mensual/Update%20Mensual%20_%20Marzo%202024.pdf?t=2024-04-16T01%3A49%3A55.822Z",
         tipo: "Informe",
         inversion: "Folsom",
       },
@@ -159,14 +153,20 @@ function formatDocumentos(data: any) {
         inversion: "Folsom",
       },
       {
-        nombre: "Update Marzo 2024",
-        link: "https://bykoetjilbiepykdxnir.supabase.co/storage/v1/object/public/Documentos/Folsom/Informes/Mensual/Update%20Mensual%20_%20Marzo%202024.pdf?t=2024-04-16T01%3A49%3A55.822Z",
+        nombre: "Update Noviembre 2022",
+        link: "https://bykoetjilbiepykdxnir.supabase.co/storage/v1/object/public/Documentos/30%20Street/Informes/Mensual/Update%20Mensual%20Noviembre%202022.pdf?t=2024-04-15T16%3A47%3A25.865Z",
         tipo: "Informe",
         inversion: "Folsom",
       },
       {
         nombre: "Update Julio 2022",
         link: "https://bykoetjilbiepykdxnir.supabase.co/storage/v1/object/public/Documentos/Folsom/Informes/Mensual/Update%20Mensual%20_%20Julio%202022.pdf?t=2024-04-16T01%3A48%3A38.225Z",
+        tipo: "Informe",
+        inversion: "Folsom",
+      },
+      {
+        nombre: "Update Mayo 2022",
+        link: "https://bykoetjilbiepykdxnir.supabase.co/storage/v1/object/public/Documentos/Folsom/Informes/Mensual/Update%20Mensual%20Mayo%202022.pdf?t=2024-04-16T01%3A47%3A35.423Z",
         tipo: "Informe",
         inversion: "Folsom",
       }
@@ -182,14 +182,14 @@ function formatDocumentos(data: any) {
         inversion: "Folsom",
       },
       {
-        nombre: "Informe trimestral Agosto 2022",
-        link: "https://bykoetjilbiepykdxnir.supabase.co/storage/v1/object/public/Documentos/Folsom/Informes/Trimestral/1844%20FOLSOM%20REPORTE%20TRIMESTRAL%20AGOSTO%202022%20.pdf?t=2024-04-16T01%3A57%3A17.568Z",
+        nombre: "Informe trimestral Diciembre 2022",
+        link: "https://bykoetjilbiepykdxnir.supabase.co/storage/v1/object/public/Documentos/Folsom/Informes/Trimestral/1844%20FOLSOM%20REPORTE%20TRIMESTRAL%20DICIEMBRE%202022%20.pdf?t=2024-04-16T01%3A57%3A31.311Z",
         tipo: "Informe",
         inversion: "Folsom",
       },
       {
-        nombre: "Informe trimestral Diciembre 2022",
-        link: "https://bykoetjilbiepykdxnir.supabase.co/storage/v1/object/public/Documentos/Folsom/Informes/Trimestral/1844%20FOLSOM%20REPORTE%20TRIMESTRAL%20DICIEMBRE%202022%20.pdf?t=2024-04-16T01%3A57%3A31.311Z",
+        nombre: "Informe trimestral Agosto 2022",
+        link: "https://bykoetjilbiepykdxnir.supabase.co/storage/v1/object/public/Documentos/Folsom/Informes/Trimestral/1844%20FOLSOM%20REPORTE%20TRIMESTRAL%20AGOSTO%202022%20.pdf?t=2024-04-16T01%3A57%3A17.568Z",
         tipo: "Informe",
         inversion: "Folsom",
       },
@@ -285,7 +285,7 @@ export default async function DocumentosPage({
                 key={tipo}
                 variant={searchParams.tipo === tipo ? "primary" : "secondary"}
                 size="xs"
-                className="mr-2"
+                className="mr-2 mb-2"
               >
                 {tipo}
               </Button>

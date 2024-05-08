@@ -20,16 +20,11 @@ export default function Card({ data }) {
   };
 
   const formatDate = (dateString) => {
+    // Verificar que la fecha no esté vacía
     if (!dateString) return "-";
-    // Dividir la fecha en partes y reordenarla a un formato 'mm-dd-yyyy'
-    const parts = dateString.split("-");
-    const formattedDate = new Date(`${parts[1]}-${parts[0]}-${parts[2]}`);
-    // Retornar la fecha formateada en el estilo deseado
-    return formattedDate.toLocaleDateString("es-ES", {
-      day: "2-digit",
-      month: "2-digit",
-      year: "numeric",
-    });
+
+    // Retornar la fecha como viene de la base de datos
+    return dateString;
   };
 
   const aportes = [];
