@@ -1,4 +1,4 @@
-import { Button, Select, SelectItem } from "@tremor/react";
+import { Button } from "@tremor/react";
 import { createClient } from "@/lib/supabase/server";
 import Navbar from "../components/Navbar";
 import { redirect } from "next/navigation";
@@ -78,13 +78,13 @@ function formatDocumentos(data: any) {
       {
         nombre: "Tasación",
         link: "https://bykoetjilbiepykdxnir.supabase.co/storage/v1/object/public/Documentos/30%20Street/Documentos%20del%20Proyecto/JLL-Value%20Opinion-%20Enero%202023.pdf?t=2024-05-09T02%3A30%3A45.767Z",
-        tipo: "Proyecto",
+        tipo: "Documentos proyectos",
         inversion: "30th Street",
       },
       {
         nombre: "Concept Review",
         link: "https://bykoetjilbiepykdxnir.supabase.co/storage/v1/object/public/Documentos/30%20Street/Documentos%20del%20Proyecto/2024.03.01_2555%2030th%20St_Concept_Arch%20Drawing%20Set%20-%20Reduced%20(1).pdf?t=2024-04-19T15%3A39%3A22.880Z",
-        tipo: "Proyecto",
+        tipo: "Documentos proyectos",
         inversion: "30th Street",
       }
     );
@@ -106,7 +106,7 @@ function formatDocumentos(data: any) {
       },
       {
         nombre: "Update Noviembre 2022",
-        link: "https://bykoetjilbiepykdxnir.supabase.co/storage/v1/object/public/Documentos/30%20Street/Informes/Mensual/Update%20Mensual%20Noviembre%202022.pdf?t=2024-04-15T16%3A47%3A25.865Z",
+        link: "https://bykoetjilbiepykdxnir.supabase.co/storage/v1/object/public/Documentos/Folsom/Informes/Mensual/Update%20Mensual%20Noviembre%202022.pdf?t=2024-05-09T16%3A53%3A52.192Z",
         tipo: "Update Mensual",
         inversion: "Folsom",
       },
@@ -118,32 +118,20 @@ function formatDocumentos(data: any) {
       },
       {
         nombre: "Update Mayo 2022",
-        link: "https://bykoetjilbiepykdxnir.supabase.co/storage/v1/object/public/Documentos/Folsom/Informes/Mensual/Update%20Mensual%20Mayo%202022.pdf?t=2024-04-16T01%3A47%3A35.423Z",
+        link: "https://bykoetjilbiepykdxnir.supabase.co/storage/v1/object/public/Documentos/Folsom/Informes/Mensual/Update%20Mensual%20Mayo%202022.pdf",
         tipo: "Update Mensual",
         inversion: "Folsom",
       },
       {
         nombre: "Bienvenida",
         link: "https://bykoetjilbiepykdxnir.supabase.co/storage/v1/object/public/Documentos/Folsom/Informes/Mensual/Bienvenida%20-%201844%20Folsom%20Street%20.pdf?t=2024-04-16T01%3A45%3A47.993Z",
-        tipo: "Update Mensual",
+        tipo: "Documentos proyectos",
         inversion: "Folsom",
       },
       {
         nombre: "Hecho Relevante",
         link: "https://bykoetjilbiepykdxnir.supabase.co/storage/v1/object/public/Documentos/Folsom/Informes/Mensual/HECHO%20RELEVANTE%20-%201844%20FOLSOM.pdf?t=2024-04-16T01%3A46%3A53.112Z",
-        tipo: "Update Mensual",
-        inversion: "Folsom",
-      },
-      {
-        nombre: "Reporte 1",
-        link: "https://bykoetjilbiepykdxnir.supabase.co/storage/v1/object/public/Documentos/Folsom/Documento%20Proyecto/CAPITAL%20STORAGE%20FUND%20III%20-%20FOLSOM%20VF.pdf?t=2024-04-16T01%3A28%3A24.295Z",
-        tipo: "Proyecto",
-        inversion: "Folsom",
-      },
-      {
-        nombre: "Reporte 2",
-        link: "https://bykoetjilbiepykdxnir.supabase.co/storage/v1/object/public/Documentos/Folsom/Documento%20Proyecto/CS%20Term%20Sheet%20Folsom%20House.pdf?t=2024-04-16T01%3A28%3A52.919Z",
-        tipo: "Proyecto",
+        tipo: "Documentos proyectos",
         inversion: "Folsom",
       },
       {
@@ -205,7 +193,28 @@ export default async function DocumentosPage({
   searchParams: { inversionista: string; tipo: string; fondo: string };
 }) {
   const supabase = createClient();
-  console.log(searchParams.fondo);
+  const fondo1 = searchParams.fondo;
+  console.log("1", fondo1);
+
+  let fondo;
+  if (fondo1 === undefined || fondo1 === "undefined") {
+    fondo = "Todos";
+  } else if (fondo1 === "Folsom") {
+    fondo = "Folsom";
+  } else if (fondo1 === "30th Street") {
+    fondo = "30th Street";
+  } else {
+    fondo = "Todos";
+  }
+  console.log(fondo1);
+
+  let tipo;
+
+  if (searchParams.tipo === undefined || searchParams.tipo === "undefined") {
+    tipo = "Todos";
+  } else {
+    tipo = searchParams.tipo;
+  }
 
   const {
     data: { user },
@@ -234,41 +243,77 @@ export default async function DocumentosPage({
       .eq("UserId", user?.id));
   }
 
-  const { data: data2, error: error2 } = await supabase
-    .from("Aportantes Folsom")
-    .select("*")
-    .eq("id", 200)
-    .single();
-
-  // console.log(data);
-
   const documentosFormateados = data ? formatDocumentos(data) : [];
 
   const tiposDeDocumento = Array.from(
     new Set(documentosFormateados.map((doc) => doc.tipo))
   );
 
-  const filtrarDocumentos = (tipo: string) => {
-    if (tipo === "Todos") {
-      return documentosFormateados;
-    } else {
-      return documentosFormateados.filter((doc) => doc.tipo === tipo);
+  const filtrarDocumentos = (tipo: string, fondo: string) => {
+    let documentosFiltrados = documentosFormateados;
+
+    if (tipo !== "Todos") {
+      documentosFiltrados = documentosFiltrados.filter(
+        (doc) => doc.tipo === tipo
+      );
     }
+
+    if (fondo !== "Todos") {
+      documentosFiltrados = documentosFiltrados.filter(
+        (doc) => doc.inversion === fondo
+      );
+    }
+
+    return documentosFiltrados;
   };
 
-  const documentosFiltrados = searchParams.tipo
-    ? filtrarDocumentos(searchParams.tipo)
-    : documentosFormateados;
+  const documentosFiltrados = filtrarDocumentos(tipo, fondo);
 
   return (
     <>
       <Navbar />
       <div className="container mx-auto px-4 py-8">
-        <h2 className="text-2xl font-semibold mb-4">Listado de Documentos</h2>
+        <h2 className="text-2xl font-semibold mb-4">
+          Listado de Documentos
+          <span className="ml-4">
+            <Link
+              href={`/documentos?inversionista=${searchParams.inversionista}&tipo=${searchParams.tipo}&fondo=Todos`}
+            >
+              <Button
+                variant={fondo === "Todos" ? "primary" : "secondary"}
+                size="xs"
+                className="mr-2"
+              >
+                Todos
+              </Button>
+            </Link>
+            <Link
+              href={`/documentos?inversionista=${searchParams.inversionista}&tipo=${searchParams.tipo}&fondo=Folsom`}
+            >
+              <Button
+                variant={fondo == "Folsom" ? "primary" : "secondary"}
+                size="xs"
+                className="mr-2"
+              >
+                Folsom
+              </Button>
+            </Link>
+            <Link
+              href={`/documentos?inversionista=${searchParams.inversionista}&tipo=${searchParams.tipo}&fondo=30th Street`}
+            >
+              <Button
+                variant={fondo === "30th Street" ? "primary" : "secondary"}
+                size="xs"
+              >
+                30th Street
+              </Button>
+            </Link>
+          </span>
+        </h2>
         <div className="mb-4">
           <span className="mr-2">Filtrar por tipo:</span>
           <Link
-            href={`/documentos?inversionista=${searchParams.inversionista}`}
+            href={`/documentos?inversionista=${searchParams.inversionista}&fondo=${searchParams.fondo}`}
           >
             <Button
               variant={

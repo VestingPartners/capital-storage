@@ -1,6 +1,7 @@
 import { DonutChart } from "@tremor/react";
 
 export default function Informe({ data }: any) {
+  console.log(data);
   const inversiones2 = [
     {
       name: "Folsom",
