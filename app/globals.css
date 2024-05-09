@@ -10,3 +10,35 @@ body {
 .primary {
     color:#3d5890
 }
+
+.tooltip {
+    position: relative;
+    cursor: pointer;
+  }
+  
+  .tooltip-text {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  
+  .tooltip::after {
+    content: attr(title);
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 8px;
+    background-color: #333;
+    color: #fff;
+    border-radius: 4px;
+    font-size: 12px;
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s;
+  }
+  
+  .tooltip:hover::after {
+    opacity: 1;
+  }

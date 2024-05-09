@@ -112,7 +112,7 @@ export default function Mapa({ data }) {
                 width={1200} // Aumentar el ancho de la imagen
                 height={800} // Aumentar la altura de la imagen
                 alt="30th Street"
-                className="rounded-lg  w-full lg:w-56 h-56"
+                className="rounded-lg  w-full lg:w-56 xl:w-[46%]  h-56"
               />
               <div className="grid grid-cols-2 gap-4  px-6">
                 <h2 className="col-span-2 text-2xl font-semibold mb-4">
@@ -137,7 +137,7 @@ export default function Mapa({ data }) {
                 width={1200} // Aumentar el ancho de la imagen
                 height={800} // Aumentar la altura de la imagen
                 alt="30th Street"
-                className="rounded-lg w-full lg:w-56 h-56" // Agregar clases para ajustar el tamaño
+                className="rounded-lg w-full lg:w-56 xl:w-[46%] h-56" // Agregar clases para ajustar el tamaño
               />
 
               <div className="grid grid-cols-2 gap-4 px-6">

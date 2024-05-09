@@ -48,30 +48,33 @@ export default function Informe({ data }: any) {
       </h3>
       {/* Barra de inversión combinada */}
       <div className="mt-4 w-full bg-gray-200 rounded-full h-8 relative">
-        {inversiones.folsom > 0 && (
-          <div
-            className={`bg-[#3d5890] h-8 ${
-              inversiones.thirtiethStreet > 0
-                ? "rounded-l-full"
-                : "rounded-full"
-            } absolute flex items-center justify-center text-[10px] text-white font-semibold`}
-            style={{ width: `${porcentajeFolsom}%` }}
-          >
-            Folsom: ${inversiones.folsom.toLocaleString()} (
-            {porcentajeFolsom.toFixed(2)}%)
-          </div>
-        )}
-        {inversiones.thirtiethStreet > 0 && (
-          <div
-            className={`bg-[#43903d] h-8 ${
-              inversiones.folsom > 0 ? "rounded-r-full" : "rounded-full"
-            } absolute right-0 flex items-center justify-center text-[10px] text-white font-semibold`}
-            style={{ width: `${porcentajeThirtiethStreet}%` }}
-          >
-            30th Street: ${inversiones.thirtiethStreet.toLocaleString()} (
-            {porcentajeThirtiethStreet.toFixed(2)}%)
-          </div>
-        )}
+        <div
+          className="h-8 absolute flex items-center justify-center text-[10px] text-white font-semibold rounded-full"
+          style={{ width: "100%" }}
+        >
+          {inversiones.folsom > 0 && (
+            <div
+              className="bg-[#3d5890] h-8 rounded-l-full flex items-center justify-center px-2 tooltip"
+              style={{ width: `${porcentajeFolsom}%` }}
+              title={`Folsom: $${inversiones.folsom.toLocaleString()} (${porcentajeFolsom.toFixed(
+                2
+              )}%)`}
+            >
+              <span className="tooltip-text">Folsom</span>
+            </div>
+          )}
+          {inversiones.thirtiethStreet > 0 && (
+            <div
+              className="bg-[#43903d] h-8 rounded-r-full flex items-center justify-center px-2 tooltip"
+              style={{ width: `${porcentajeThirtiethStreet}%` }}
+              title={`30th Street: $${inversiones.thirtiethStreet.toLocaleString()} (${porcentajeThirtiethStreet.toFixed(
+                2
+              )}%)`}
+            >
+              <span className="tooltip-text">30th Street</span>
+            </div>
+          )}
+        </div>
       </div>
       {mostrarDonutChart && (
         <DonutChart
