@@ -50,12 +50,16 @@ export default function Informe({ data }: any) {
       {/* Barra de inversión combinada */}
       <div className="mt-4 w-full bg-gray-200 rounded-full h-8 relative">
         <div
-          className="h-8 absolute flex items-center justify-center text-[10px] text-white font-semibold rounded-full"
+          className="h-8 absolute flex items-center justify-center text-[10px] text-white font-semibold"
           style={{ width: "100%" }}
         >
           {inversiones.folsom > 0 && (
             <div
-              className="bg-[#3d5890] h-8 rounded-l-full flex items-center justify-center px-2 tooltip"
+              className={`bg-[#3d5890] h-8 ${
+                inversiones.thirtiethStreet === 0
+                  ? "rounded-full"
+                  : "rounded-l-full"
+              } flex items-center justify-center px-2 tooltip`}
               style={{ width: `${porcentajeFolsom}%` }}
               title={`Folsom: $${inversiones.folsom.toLocaleString()} (${porcentajeFolsom.toFixed(
                 2
@@ -66,7 +70,9 @@ export default function Informe({ data }: any) {
           )}
           {inversiones.thirtiethStreet > 0 && (
             <div
-              className="bg-[#43903d] h-8 rounded-r-full flex items-center justify-center px-2 tooltip"
+              className={`bg-[#43903d] h-8 ${
+                inversiones.folsom === 0 ? "rounded-full" : "rounded-r-full"
+              } flex items-center justify-center px-2 tooltip`}
               style={{ width: `${porcentajeThirtiethStreet}%` }}
               title={`30th Street: $${inversiones.thirtiethStreet.toLocaleString()} (${porcentajeThirtiethStreet.toFixed(
                 2
