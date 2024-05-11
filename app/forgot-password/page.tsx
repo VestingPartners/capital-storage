@@ -3,6 +3,7 @@ import { SubmitButton } from "../login/submit-button";
 import Image from "next/image";
 import { createClient } from "@/lib/supabase/server";
 import { redirect } from "next/navigation";
+import { headers } from "next/headers";
 
 export default function ForgotPassword({
   searchParams,
@@ -13,13 +14,13 @@ export default function ForgotPassword({
     "use server";
 
     const email = formData.get("email") as string;
+
+    const origin = headers().get("origin");
     const supabase = createClient();
 
-    let { data, error } = await supabase.auth.resetPasswordForEmail(email);
-
-    if (error) {
-      console.log(error);
-    }
+    const { error } = await supabase.auth.resetPasswordForEmail(email, {
+      redirectTo: `${origin}/new-password`,
+    });
 
     return redirect(
       "/forgot-password?message=Se le ha enviado un correo, revisar spam."

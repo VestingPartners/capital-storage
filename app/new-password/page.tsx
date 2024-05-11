@@ -7,8 +7,10 @@ import { redirect } from "next/navigation";
 export default function NewPassword({
   searchParams,
 }: {
-  searchParams: { message: string };
+  searchParams: { message: string; code: string };
 }) {
+  const code = searchParams.code;
+  console.log(code);
   const signIn = async (formData: FormData) => {
     "use server";
 
@@ -21,10 +23,17 @@ export default function NewPassword({
       );
     }
     const supabase = createClient();
-    await supabase.auth.updateUser({
-      email: email,
-      password: password,
-    });
+    const { error: dfs } = await supabase.auth.exchangeCodeForSession(
+      searchParams.code
+    );
+
+    console.log("dfs", dfs);
+
+    const { data: updateData, error: updateError } =
+      await supabase.auth.updateUser({ password: password });
+
+    console.log("data", updateData);
+    console.log("error", updateError);
 
     const { data, error } = await supabase.auth.signInWithPassword({
       email,
