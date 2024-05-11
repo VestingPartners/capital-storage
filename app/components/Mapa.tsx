@@ -53,6 +53,17 @@ export default function Mapa({ data }) {
     setSelectedProject(project);
   };
 
+  const filteredLocations = [
+    data[0]["Total Invertido Folsom"] > 0 && {
+      lat: 40.019029202242116,
+      lng: -105.2626646739601,
+    },
+    data[0]["Total Invertido 30 Street"] > 0 && {
+      lat: 40.026993950936536,
+      lng: -105.25426364327721,
+    },
+  ].filter(Boolean);
+
   return isLoaded ? (
     <div className="flex flex-col gap-6 w-full">
       <div className="w-full h-fit p-4 rounded-lg bg-white shadow-sm border border-black/5">
@@ -67,34 +78,38 @@ export default function Mapa({ data }) {
           onLoad={onLoad}
           onUnmount={onUnmount}
         >
-          {locations.map((location, index) => (
+          {filteredLocations.map((location, index) => (
             <Marker key={index} position={location} />
           ))}
         </GoogleMap>
       </div>
 
       <div className="w-full bg-white shadow-sm border border-black/5 rounded-lg p-4">
-        <div className="flex justify-between items-center  mb-4">
-          {data[0]["Total Invertido Folsom"] != 0 && (
+        <div className="flex justify-between items-center mb-4">
+          {data[0]["Total Invertido Folsom"] > 0 && (
             <Button
               variant={selectedProject === "Folsom" ? "primary" : "secondary"}
               onClick={() =>
-                moveToLocation(locations[0].lat, locations[0].lng, "Folsom")
+                moveToLocation(
+                  filteredLocations[0].lat,
+                  filteredLocations[0].lng,
+                  "Folsom"
+                )
               }
             >
               Folsom
             </Button>
           )}
 
-          {data[0]["Total Invertido 30 Street"] != 0 && (
+          {data[0]["Total Invertido 30 Street"] > 0 && (
             <Button
               variant={
                 selectedProject === "30th Street" ? "primary" : "secondary"
               }
               onClick={() =>
                 moveToLocation(
-                  locations[1].lat,
-                  locations[1].lng,
+                  filteredLocations[1].lat,
+                  filteredLocations[1].lng,
                   "30th Street"
                 )
               }
