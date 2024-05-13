@@ -70,7 +70,7 @@ function formatDocumentos(data: any) {
         inversion: "30th Street",
       },
       {
-        nombre: "Doc Subs Legal 30 Street",
+        nombre: "Subscription Agreement 30 Street",
         link: data[0]["Doc Subs Legal 30 Street"],
         tipo: "Legal",
         inversion: "30th Street",
@@ -171,13 +171,13 @@ function formatDocumentos(data: any) {
         inversion: "Folsom",
       },
       {
-        nombre: "Doc Legal 2 Folsom",
+        nombre: "Subscription Agreement 2 Folsom",
         link: data[0]["Doc Legal 2 Folsom"],
         tipo: "Legal",
         inversion: "Folsom",
       },
       {
-        nombre: "Doc Legal Folsom",
+        nombre: "Subscription Agreement Folsom",
         link: data[0]["Doc Legal Folsom"],
         tipo: "Legal",
         inversion: "Folsom",
