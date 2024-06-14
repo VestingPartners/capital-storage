@@ -46,6 +46,12 @@ function formatDocumentos(data: any) {
         inversion: "30th Street",
       },
       {
+        nombre: "Informe trimestral Junio 2024",
+        link: "https://bykoetjilbiepykdxnir.supabase.co/storage/v1/object/public/Documentos/30%20Street/Informes/Trimestral/30th_Street_-_Junio_2024.pdf?t=2024-06-14T21%3A51%3A07.833Z",
+        tipo: "Informe Trimestral",
+        inversion: "30th Street",
+      },
+      {
         nombre: "Informe trimestral Diciembre 2022",
         link: "https://bykoetjilbiepykdxnir.supabase.co/storage/v1/object/public/Documentos/30%20Street/Informes/Trimestral/30th%20Street%20-%20Diciembre%202022.pdf?t=2024-04-15T16%3A52%3A16.294Z",
         tipo: "Informe Trimestral",
@@ -54,12 +60,6 @@ function formatDocumentos(data: any) {
       {
         nombre: "Informe trimestral Agosto 2022",
         link: "https://bykoetjilbiepykdxnir.supabase.co/storage/v1/object/public/Documentos/30%20Street/Informes/Trimestral/30th%20Street%20-%20Agosto%202022.pdf?t=2024-04-15T16%3A52%3A11.828Z",
-        tipo: "Informe Trimestral",
-        inversion: "30th Street",
-      },
-      {
-        nombre: "Informe trimestral Junio 2024",
-        link: "https://bykoetjilbiepykdxnir.supabase.co/storage/v1/object/public/Documentos/30%20Street/Informes/Trimestral/30th_Street_-_Junio_2024.pdf?t=2024-06-14T21%3A51%3A07.833Z",
         tipo: "Informe Trimestral",
         inversion: "30th Street",
       },
@@ -153,6 +153,12 @@ function formatDocumentos(data: any) {
         inversion: "Folsom",
       },
       {
+        nombre: "Informe trimestral Junio 2024",
+        link: "https://bykoetjilbiepykdxnir.supabase.co/storage/v1/object/public/Documentos/Folsom/Informes/Trimestral/1844_FOLSOM_REPORTE_TRIMESTRAL_JUNIO_2024.pdf?t=2024-06-14T15%3A48%3A24.412Z",
+        tipo: "Informe Trimestral",
+        inversion: "Folsom",
+      },
+      {
         nombre: "Informe trimestral Abril 2023",
         link: "https://bykoetjilbiepykdxnir.supabase.co/storage/v1/object/public/Documentos/Folsom/Informes/Trimestral/1844%20FOLSOM%20REPORTE%20TRIMESTRAL%20ABRIL%202023%20.pdf?t=2024-04-16T01%3A56%3A49.089Z",
         tipo: "Informe Trimestral",
@@ -173,12 +179,6 @@ function formatDocumentos(data: any) {
       {
         nombre: "Informe trimestral Marzo 2022",
         link: "https://bykoetjilbiepykdxnir.supabase.co/storage/v1/object/public/Documentos/Folsom/Informes/Trimestral/1844%20FOLSOM%20REPORTE%20TRIMESTRAL%20MARZO%202022.pdf?t=2024-04-16T01%3A57%3A38.613Z",
-        tipo: "Informe Trimestral",
-        inversion: "Folsom",
-      },
-      {
-        nombre: "Informe trimestral Junio 2024",
-        link: "https://bykoetjilbiepykdxnir.supabase.co/storage/v1/object/public/Documentos/Folsom/Informes/Trimestral/1844_FOLSOM_REPORTE_TRIMESTRAL_JUNIO_2024.pdf?t=2024-06-14T15%3A48%3A24.412Z",
         tipo: "Informe Trimestral",
         inversion: "Folsom",
       },
