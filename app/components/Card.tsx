@@ -11,7 +11,7 @@ import {
   TableRow,
 } from "@tremor/react";
 
-export default function Card({ data }) {
+export default function Card({ data, folsomData, streetData }) {
   const formatCurrency = (amount) => {
     // Si el monto es nulo o 0, no se muestra
     if (!amount) return "-";
@@ -29,34 +29,27 @@ export default function Card({ data }) {
 
   const aportes = [];
 
-  if (data[0]["Total Invertido 30 Street"]) {
-    aportes.push({
-      proyecto: "30th Street",
-      fecha: data[0]["Fecha Aporte 30 Street"],
-      monto: data[0]["Monto Aporte 30 Street"],
-      dividendos: "-", // Asumiendo que no hay datos de dividendos por ahora
+  // Agregar los aportes de inversión de 30th Street a la tabla
+  if (streetData && streetData["Aportes Inversionistas 30 Street"]) {
+    streetData["Aportes Inversionistas 30 Street"].forEach((aporte) => {
+      aportes.push({
+        proyecto: aporte.Proyecto,
+        fecha: aporte.Fecha_Aporte,
+        monto: aporte.Capital_Call_usd,
+        dividendos: "-", // Asumiendo que no hay datos de dividendos por ahora
+      });
     });
   }
 
-  // Comprobamos si hay un aporte Folsom válido para incluir
-  if (
-    data[0]["Total Invertido Folsom"] &&
-    data[0]["Monto 1 Aporte Folsom"] !== null
-  ) {
-    aportes.push({
-      proyecto: "Folsom",
-      fecha: data[0]["Fecha 1 Aporte Folsom"],
-      monto: data[0]["Monto 1 Aporte Folsom"],
-      dividendos: "-", // Asumiendo que no hay datos de dividendos por ahora
-    });
-  }
-
-  if (data[0]["Monto 2 Aporte Folsom"]) {
-    aportes.push({
-      proyecto: "Folsom",
-      fecha: data[0]["Fecha 2 Aporte Folsom"],
-      monto: data[0]["Monto 2 Aporte Folsom"],
-      dividendos: "-", // Asumiendo que no hay datos de dividendos por ahora
+  // Agregar los aportes de inversión de Folsom a la tabla
+  if (folsomData && folsomData["Aportes Inversiones Folsom"]) {
+    folsomData["Aportes Inversiones Folsom"].forEach((aporte) => {
+      aportes.push({
+        proyecto: aporte.Proyecto,
+        fecha: aporte.Fecha_Aporte,
+        monto: aporte.Capital_Call_usd,
+        dividendos: "-", // Asumiendo que no hay datos de dividendos por ahora
+      });
     });
   }
 

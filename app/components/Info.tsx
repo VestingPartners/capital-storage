@@ -1,53 +1,69 @@
+//@ts-nocheck
+
 import { DonutChart } from "@tremor/react";
 
-export default function Informe({ data }: any) {
-  console.log(data);
+export default function Informe({ folsomData, streetData }: any) {
+  const totalInvertidoFolsom =
+    folsomData?.["Aportes Inversiones Folsom"]?.reduce(
+      (acc, aporte) => acc + aporte.Capital_Call_usd,
+      0
+    ) || 0;
+
+  const totalInvertidoStreet =
+    streetData?.["Aportes Inversionistas 30 Street"]?.reduce(
+      (acc, aporte) => acc + aporte.Capital_Call_usd,
+      0
+    ) || 0;
+
   const inversiones2 = [
     {
       name: "Folsom",
-      value: data[0]["Total Invertido Folsom"],
+      value: totalInvertidoFolsom,
       color: "#3d5890", // Color para Folsom
     },
     {
       name: "30 th Street",
-      value: data[0]["Total Invertido 30 Street"],
+      value: totalInvertidoStreet,
       color: "#43903d", // Color para 30 th Street
     },
   ].filter((inv) => inv.value > 0);
-  // Suponiendo que estos son los montos de inversión
+
   const inversiones = {
-    folsom: data[0]["Total Invertido Folsom"],
-    thirtiethStreet: data[0]["Total Invertido 30 Street"],
+    folsom: totalInvertidoFolsom,
+    thirtiethStreet: totalInvertidoStreet,
   };
 
-  // Calculando el total para usar en el cálculo del porcentaje
   const totalInversiones = Object.values(inversiones).reduce(
     (acc, val) => acc + val,
     0
   );
 
-  // Calculando los porcentajes de inversión
   const porcentajeFolsom = (inversiones.folsom / totalInversiones) * 100;
   const porcentajeThirtiethStreet =
     (inversiones.thirtiethStreet / totalInversiones) * 100;
 
   const mostrarDonutChart = inversiones2.length > 1;
+
   return (
     <div className="card w-full h-fit rounded-md p-5 shadow-sm border border-black/5 bg-white flex flex-col">
       <p className="text-xl font-bold w-full text-center">
-        {data[0].Inversionista}
+        {folsomData?.Inversionista || streetData?.Inversionista}
       </p>
       <h3 className="mt-4 text-lg flex">
         Capital total invertido:
         <p className="ml-2 text-lg font-semibold">
-          USD ${data[0]["Total Inversiones"].toLocaleString("es-ES")}
+          USD ${totalInversiones.toLocaleString("es-ES")}
         </p>
       </h3>
       <h3 className="mt-2 text-lg flex">
         Inversiones vigentes:{" "}
-        <p className="ml-2 text-lg font-semibold">{data[0].Inversiones}</p>
+        <p className="ml-2 text-lg font-semibold">
+          {
+            Object.keys(inversiones).filter((inv) => inversiones[inv] > 0)
+              .length
+          }
+        </p>
       </h3>
-      {/* Barra de inversión combinada */}
       <div className="mt-4 w-full bg-gray-200 rounded-full h-8 relative">
         <div
           className="h-8 absolute flex items-center justify-center text-[10px] text-white font-semibold"
