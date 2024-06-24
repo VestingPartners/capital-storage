@@ -89,13 +89,15 @@ export default async function DocumentosPage({
       .from("Aportantes Folsom")
       .select("*")
       .eq("User Id", user?.id)
-      .eq("Inversionista", searchParams.inversionista));
+      .eq("Inversionista", searchParams.inversionista)
+      .single());
 
     ({ data: dataStreet, error } = await supabase
       .from("Aportantes 30 Street")
       .select("*")
       .eq("User Id", user?.id)
-      .eq("Inversionista", searchParams.inversionista));
+      .eq("Inversionista", searchParams.inversionista)
+      .single());
   } else {
     ({ data: dataFolsom, error } = await supabase
       .from("Aportantes Folsom")
